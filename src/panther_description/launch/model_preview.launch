@@ -1,0 +1,9 @@
+<launch>
+
+  <param name="panther_description" command="$(find xacro)/xacro.py '$(find panther_description)/urdf/panther.xacro'"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find panther_description)/rviz/panther.rviz" required="true" output="screen"/>
+
+</launch>

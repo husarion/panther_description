@@ -3,7 +3,10 @@
 
   <include file="$(find panther_description)/launch/panther_rviz.launch"></include>
 
-  <include file="$(find panther_description)/launch/gmapping.launch"></include>
+  <node pkg="slam_toolbox" type="sync_slam_toolbox_node" name="slam_toolbox" output="screen">
+    <rosparam command="load" file="$(find panther_navigation)/config/mapper_params_online_sync.yaml" />
+  </node>
+
 
   <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen"/>
 

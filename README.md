@@ -32,6 +32,9 @@ Install depencencies:
 ```
 cd ~/ros_workspace
 rosdep install --from-paths src --ignore-src -r -y
+git clone https://github.com/ros/robot_state_publisher.git
+sudo apt install ros-noetic-openslam-gmapping
+git clone https://github.com/ros-perception/slam_gmapping.git 
 ```
 
 Build the workspace:

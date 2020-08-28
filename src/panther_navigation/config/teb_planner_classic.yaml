@@ -23,7 +23,7 @@ TebLocalPlannerROS:
 
   footprint_model:
     type: "line"
-    line_start: [-20.0, 0.0]
+    line_start: [-0.20, 0.0]
     line_end: [0.20, 0.0]
     # type: "two_circles"
     # front_offset: 0.2 # for type "two_circles"

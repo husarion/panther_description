@@ -8,7 +8,7 @@ TebLocalPlannerROS:
   dt_hysteresis: 0.1
   global_plan_overwrite_orientation: True
   allow_init_with_backwards_motion: False
-  max_global_plan_lookahead_dist: 2.0
+  max_global_plan_lookahead_dist: 5.0
   feasibility_check_no_poses: 2
   exact_arc_length: False
   # Robot
@@ -18,8 +18,8 @@ TebLocalPlannerROS:
   max_vel_theta: 0.20
   acc_lim_x: 0.2
   acc_lim_theta: 0.15
-  min_turning_radius: 0.5 # diff-drive robot (can turn on place!)
-  wheelbase: 0.0
+  min_turning_radius: 0.0 # diff-drive robot (can turn on place!)
+  wheelbase: 0.85
 
   footprint_model:
     type: "line"
@@ -60,10 +60,10 @@ TebLocalPlannerROS:
   weight_acc_lim_x: 1
   weight_acc_lim_theta: 1
   weight_kinematics_nh: 1000
-  weight_kinematics_forward_drive: 1
+  weight_kinematics_forward_drive: 0.0
   weight_kinematics_turning_radius: 1
-  weight_optimaltime: 10
-  weight_obstacle: 50
+  weight_optimaltime: 15
+  weight_obstacle: 20
   weight_dynamic_obstacle: 10 # not in use yet
   # weight_adapt_factor: 2
 

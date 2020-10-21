@@ -4,9 +4,9 @@ local_costmap:
   transform_tolerance: 0.25
   static_map: false
   rolling_window: true
-  width: 5
-  height: 5
-  origin_x: -2.5
-  origin_y: -2.5
-  resolution: 0.02
+  width: 8
+  height: 8
+  origin_x: -4.0
+  origin_y: -4.0
+  resolution: 0.01
   inflation_radius: 1.0

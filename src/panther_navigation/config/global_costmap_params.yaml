@@ -3,11 +3,12 @@ global_costmap:
   publish_frequency: 1.5
   transform_tolerance: 0.5
   rolling_window: false
-  inflation_radius: 2.5
-  resolution: 0.01
+  inflation_radius: 0.8
+  resolution: 0.03
 
-  plugins: 
-    - {name: static_map,       type: "costmap_2d::StaticLayer"}
-      
+  plugins:
+    - { name: static_map, type: "costmap_2d::StaticLayer" }
+    - { name: inflation, type: "costmap_2d::InflationLayer" }
+
   static_map:
     lethal_cost_threshold: 115

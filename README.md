@@ -4,7 +4,7 @@ URDF model for Gazebo integrated with ROS.
 
 ## Installation. ## 
 
-We assume that you are working on Ubuntu 18.04 and already have installed ROS Melodic. If not, follow the [ROS install guide](http://wiki.ros.org/melodic/Installation/Ubuntu)
+We assume that you are working on Ubuntu 20.04 and already have installed ROS Noetic. If not, follow the [ROS install guide](http://wiki.ros.org/melodic/Installation/Ubuntu)
 
 Prepare the repository:
 ```
@@ -32,6 +32,9 @@ Install depencencies:
 ```
 cd ~/ros_workspace
 rosdep install --from-paths src --ignore-src -r -y
+git clone https://github.com/ros/robot_state_publisher.git
+sudo apt install ros-noetic-openslam-gmapping
+git clone https://github.com/ros-perception/slam_gmapping.git 
 ```
 
 Build the workspace:
@@ -59,16 +62,15 @@ In Terminal 1, launch the Gazebo simulation:
 roslaunch panther_description panther_rviz_gmapping.launch
 ```
 
-In Terminal 2, start teleop and drive the Panther, observe in Rviz as the map is created:
-
-```
-roslaunch panther_navigation panther_teleop.launch
-```
-
 When you are satisfied with created map, you can save it. Open new terminal and save the map to some given path: 
 
 ```
 rosrun map_server map_saver -f ~/ros_workspace/src/panther_description/src/panther_navigation/maps/test_map
+```
+
+To launch navigation use:
+```
+roslaunch panther_navigation panther_gazebo_nav.launch
 ```
 
 Now to make saved map loading possible you have to close all previous terminals and run the following commands below. Once loaded, use rviz to set 2D Nav Goal and the robot will autonomously reach the indicated position

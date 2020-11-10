@@ -118,7 +118,7 @@
     reading. -->
 
   <!-- RpLidar S1 using GPU -->
-  <gazebo reference="laser">
+  <!-- <gazebo reference="laser">
     <sensor type="gpu_ray" name="head_rplidar_sensor">
       <pose>0 0 0 0 0 0</pose>
       <visualize>true</visualize>
@@ -148,10 +148,10 @@
         <frameName>laser</frameName>
       </plugin>
     </sensor>
-  </gazebo>
+  </gazebo> -->
 
   <!-- RpLidar S1 using CPU -->
-  <!-- <gazebo reference="laser">
+  <gazebo reference="laser">
     <sensor type="ray" name="head_rplidar_sensor">
       <pose>0 0 0.06 0 0 0</pose>
       <visualize>false</visualize>
@@ -161,8 +161,8 @@
           <horizontal>
             <samples>720</samples>
             <resolution>1</resolution>
-            <min_angle>-3.14159265</min_angle>
-            <max_angle>3.14159265</max_angle>
+            <min_angle>-3.1</min_angle>
+            <max_angle>3.1</max_angle>
           </horizontal>
         </scan>
         <range>
@@ -181,7 +181,7 @@
         <frameName>laser</frameName>
       </plugin>
     </sensor>
-  </gazebo> -->
+  </gazebo>
 
   <gazebo reference="top">
     <gravity>true</gravity>

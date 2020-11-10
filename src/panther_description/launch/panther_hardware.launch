@@ -5,9 +5,9 @@
 
   <include file="$(find rplidar_ros)/launch/rplidar.launch"></include>
 
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find panther_description)/urdf/panther.xacro'"/>
+  <param name="robot_description" command="$(find xacro)/xacro '$(find panther_description)/urdf/panther.xacro'"/>
 
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+  <node name="state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
   <node pkg="panther_description" type="serial_bridge.py" name="serial_bridge" output="screen">
     <param name="port" value="/dev/ttyCORE2" />

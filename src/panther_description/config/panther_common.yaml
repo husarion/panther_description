@@ -1,0 +1,20 @@
+base_link:
+  mass: 20
+  inertia: {ixx: 0.00009165, ixy:  0.00000598, ixz: -0.0000018,
+            iyy: 0.00003309, iyz: -0.00001473, izz:  0.00008256}
+  wheel_separation: 0.8
+  visual:
+    cover:
+      mesh: body_top.stl
+      color_rgb: "0.8 0.0 0.0"
+    base:
+      mesh: body_bottom.stl
+      color_rgb: "1.0 1.0 1.0"
+  collision:
+    mesh: body_bottom.stl
+
+motors:
+  max_torque: 10
+  max_velocity: 10
+  joint_damping: 0.0
+  joint_friction: 0.0

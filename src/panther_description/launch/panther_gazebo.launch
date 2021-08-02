@@ -4,7 +4,7 @@
   <rosparam command="load" file="$(find joint_state_controller)/joint_state_controller.yaml" />
   <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="joint_state_controller" />
 
-  <param name="robot_description" command="$(find xacro)/xacro '$(find panther_description)/urdf/panther.xacro'"/>
+  <param name="robot_description" command="$(find xacro)/xacro '$(find panther_description)/urdf/panther.urdf.xacro'"/>
 
   <node name="panther_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model panther" />
 

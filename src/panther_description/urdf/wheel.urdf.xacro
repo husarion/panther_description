@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- wheel defining macro -->
+  <xacro:macro name="wheel" params="wheel_props common_props prefix">
+
+    <xacro:property name="rpy" value="0 0 ${pi/2}" />
+    <xacro:if value="${prefix == 'front_left'}">
+      <xacro:property name="x" value="0.38" />
+      <xacro:property name="y" value="${common_props['base_link']['wheel_separation']/2}" />
+    </xacro:if>
+    <xacro:if value="${prefix == 'front_right'}">
+      <xacro:property name="x" value="0.38" />
+      <xacro:property name="y" value="-${common_props['base_link']['wheel_separation']/2}" />
+    </xacro:if>
+    <xacro:if value="${prefix == 'rear_left'}">
+      <xacro:property name="x" value="-0.38" />
+      <xacro:property name="y" value="${common_props['base_link']['wheel_separation']/2}" />
+    </xacro:if>
+    <xacro:if value="${prefix == 'rear_right'}">
+      <xacro:property name="x" value="-0.38" />
+      <xacro:property name="y" value="-${common_props['base_link']['wheel_separation']/2}" />
+    </xacro:if>
+
+
+    <link name="${prefix}_wheel_link">
+       <visual>
+        <geometry>
+            <xacro:property name="mesh" value="${wheel_props['visual_mesh']}" />
+            <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
+        </geometry>
+        <origin xyz="0 0 0" rpy="${rpy}"/>
+        <material name="wheel_color"> <color rgba="${wheel_props['color_rgb']} 1.0"/> </material>
+      </visual>
+
+      <collision>
+        <geometry>
+            <xacro:property name="mesh" value="${wheel_props['collision_mesh']}" />
+            <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
+        </geometry>
+        <origin xyz="0 0 0" rpy="${rpy}" />
+      </collision>
+
+      <inertial>
+          <mass value="${wheel_props['mass']}" />
+          <inertia ixx="${wheel_props['inertia']['ixx']}"
+                   ixy="${wheel_props['inertia']['ixy']}"
+                   ixz="${wheel_props['inertia']['ixz']}"
+                   iyy="${wheel_props['inertia']['iyy']}"
+                   iyz="${wheel_props['inertia']['iyz']}"
+                   izz="${wheel_props['inertia']['izz']}" />
+      </inertial>
+    </link>
+
+    <joint name="${prefix}_wheel_joint" type="continuous">
+      <parent link="base_link" />
+      <child link="${prefix}_wheel_link" />
+      <origin xyz="${x} ${y} 0" rpy="0 0 0" />
+      <axis xyz="1 0 0" />
+
+      <limit effort="${common_props['motors']['max_torque']}"
+             velocity="${common_props['motors']['max_velocity']}" />
+
+      <dynamics damping="${common_props['motors']['joint_damping']}"
+                friction="${common_props['motors']['joint_friction']}"/>
+    </joint>
+
+    <transmission name="${prefix}_wheel_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}_wheel_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}_actuator">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+    <gazebo reference="${prefix}_wheel_link">
+      <mu1 value="${wheel_props['lateral_friction']}" />
+      <mu2 value="${wheel_props['spinning_friction']}" />
+      <kp value="${wheel_props['contact_stiffness']}" />
+      <kd value="${wheel_props['contact_damping']}" />
+      <fdir1 value="1 0 0"/>
+      <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <gazebo reference="${prefix}_wheel_joint">
+      <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- base_link defining macro -->
+  <xacro:macro name="base_link" params="props">
+
+    <link name="dummy"></link> 
+
+    <link name="base_link">
+      <visual>
+        <geometry>
+            <xacro:property name="mesh" value="${props['visual']['base']['mesh']}" />
+            <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
+        </geometry>
+        <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
+        <material name="base_color"> <color rgba="${props['visual']['base']['color_rgb']} 1.0"/> </material>
+      </visual>
+
+      <collision>
+        <geometry>
+            <xacro:property name="mesh" value="${props['collision']['mesh']}" />
+          <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
+        </geometry>
+        <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
+      </collision>
+
+      <inertial>
+          <mass value="${props['mass']}" />
+          <inertia ixx="${props['inertia']['ixx']}"
+                   ixy="${props['inertia']['ixy']}"
+                   ixz="${props['inertia']['ixz']}"
+                   iyy="${props['inertia']['iyy']}"
+                   iyz="${props['inertia']['iyz']}"
+                   izz="${props['inertia']['izz']}" />
+      </inertial>
+    </link>
+
+    <link name="cover">
+      <inertial>
+        <mass value="0.00000000001" />
+        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+      </inertial>
+      <visual>
+        <geometry>
+          <xacro:property name="mesh" value="${props['visual']['cover']['mesh']}" />
+          <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
+        </geometry>
+        <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
+        <material name="cover_color"> <color rgba="${props['visual']['cover']['color_rgb']} 1.0"/> </material>
+      </visual>
+    </link> 
+
+    <joint name="dummy_to_base_link_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="dummy" />
+      <child link="base_link" />
+    </joint>
+
+    <joint name="base_link_to_cover_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="base_link" />
+      <child link="cover" />
+    </joint>
+
+    <gazebo reference="base_link">
+      <material>Gazebo/White</material>
+    </gazebo>
+
+    <gazebo reference="cover">
+      <material>Gazebo/Red</material>
+    </gazebo>
+  
+  </xacro:macro>
+
+</robot>

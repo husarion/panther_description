@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+
+<robot name="panther" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="panther_common_props_path" default="$(find panther_description)/config/panther_common.yaml" />
+  <xacro:arg name="wheel_props_path" default="$(find panther_description)/config/classic_wheels_props.yaml" />
+
+  <!-- IMPORT YAML CONFIGS -->
+  <xacro:property name="panther_common_props_file" value="$(arg panther_common_props_path)"  />
+  <xacro:property name="panther_common_props" value="${load_yaml(panther_common_props_file)}" />
+
+  <xacro:property name="wheel_props_file" value="$(arg wheel_props_path)"  />
+  <xacro:property name="wheel_props" value="${load_yaml(wheel_props_file)}" />
+
+
+  <!-- INCLUDE ROBOT PARTS DEFINITIONS -->
+  <xacro:include filename="$(find panther_description)/urdf/base_link.urdf.xacro" ns="base_link" />
+  <xacro:include filename="$(find panther_description)/urdf/wheel.urdf.xacro" ns="wheel" />
+  <xacro:include filename="$(find panther_description)/urdf/gazebo_plugins.gazebo.xacro" ns="gazebo" />
+
+  <!-- BODY DECLARATION -->
+  <xacro:base_link.base_link props="${panther_common_props['base_link']}" />
+
+  <!-- WHEEL DECLARATION -->
+  <xacro:wheel.wheel wheel_props="${wheel_props['front_wheels']}" common_props="${panther_common_props}" prefix="front_left" />
+  <xacro:wheel.wheel wheel_props="${wheel_props['front_wheels']}" common_props="${panther_common_props}" prefix="front_right" />
+  <xacro:wheel.wheel wheel_props="${wheel_props['rear_wheels']}"  common_props="${panther_common_props}" prefix="rear_left" />
+  <xacro:wheel.wheel wheel_props="${wheel_props['rear_wheels']}"  common_props="${panther_common_props}" prefix="rear_right" />
+  
+  <!-- GAZEBO PLUGINS -->
+  <xacro:gazebo.skid_drive wheel_props="${wheel_props['front_wheels']}" common_props="${panther_common_props}" />
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+
+
+
+</robot>

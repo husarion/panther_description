@@ -233,7 +233,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: odom
+    Fixed Frame: dummy
     Frame Rate: 30
   Name: root
   Tools:

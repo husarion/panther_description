@@ -6,10 +6,10 @@ chassis:
   visual:
     cover:
       mesh: body_top.stl
-      color_rgb: "0.8 0.0 0.0"
+      color: Red
     base:
       mesh: body_bottom.stl
-      color_rgb: "1.0 1.0 1.0"
+      color: White
   collision:
     mesh: body_bottom.stl
 

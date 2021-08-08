@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="rplidar_s1" params="xyz rpy use_gpu:=false prefix:=front topic:=scan">
+    <xacro:if value="${use_gpu}">
+      <xacro:property name="ray_type" value="gpu_ray" />
+      <xacro:property name="plugin_file_name" value="libgazebo_ros_gpu_laser.so" />
+    </xacro:if>
+    <xacro:unless value="${use_gpu}">
+      <xacro:property name="ray_type" value="ray" />
+      <xacro:property name="plugin_file_name" value="libgazebo_ros_laser.so" />
+    </xacro:unless>
+
+    <link name="${prefix}_rplidar_s1_link">
+      <visual>
+        <geometry>
+            <mesh filename="package://panther_description/meshes/components/rplidar_s1.stl" scale="0.0001 0.0001 0.0001" />
+        </geometry>
+        <origin xyz="0 0 ${0.051/2}" rpy="0 0 -${pi/2}"/>
+        <material name="DarkGrey"/>
+      </visual>
+
+      <collision>
+        <geometry>
+          <cylinder radius="${0.0555/2}" length="0.051" />
+        </geometry>
+        <origin xyz="0 0 ${0.051/2}" rpy="0 0 0"/>
+      </collision>
+
+      <inertial>
+          <mass value="0.105" />
+          <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+      </inertial>
+    </link>
+
+    <joint name="base_link_to_${prefix}_rplidar_s1_link_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="base_link" />
+      <child link="${prefix}_rplidar_s1_link" />
+    </joint>
+
+    <gazebo reference="${prefix}_rplidar_s1_link">
+      <material>Gazebo/DarkGrey</material>
+    </gazebo>
+
+    <gazebo reference="${prefix}_rplidar_s1_link">
+      <sensor type="${ray_type}" name="${prefix}_rplidar_s1_sensor">
+        <pose>0 0 0.045 0 0 0</pose>
+        <visualize>false</visualize>
+        <update_rate>10</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>9200</samples>
+              <resolution>0.391</resolution>
+              <min_angle>-3.14159265</min_angle>
+              <max_angle>3.14159265</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.2</min>
+            <max>40.0</max>
+            <resolution>0.03</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.05</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+        <plugin name="gazebo_ros_head_rplidar_controller" filename="${plugin_file_name}">
+          <topicName>${topic}</topicName>
+          <frameName>${prefix}_rplidar_s1_link</frameName>
+        </plugin>
+      </sensor>
+    </gazebo> 
+  </xacro:macro>
+</robot>

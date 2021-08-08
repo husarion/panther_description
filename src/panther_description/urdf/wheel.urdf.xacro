@@ -30,7 +30,7 @@
             <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
         </geometry>
         <origin xyz="0 0 0" rpy="${rpy}"/>
-        <material name="wheel_color"> <color rgba="${wheel_props['color_rgb']} 1.0"/> </material>
+        <material name="${wheel_props['color']}"/>
       </visual>
 
       <collision>
@@ -82,7 +82,7 @@
       <kp value="${wheel_props['contact_stiffness']}" />
       <kd value="${wheel_props['contact_damping']}" />
       <fdir1 value="1 0 0"/>
-      <material>Gazebo/Grey</material>
+      <material>Gazebo/${wheel_props['color']}</material>
     </gazebo>
 
     <gazebo reference="${prefix}_wheel_joint">

@@ -13,13 +13,13 @@
             <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
         </geometry>
         <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
-        <material name="base_color"> <color rgba="${props['visual']['base']['color_rgb']} 1.0"/> </material>
+        <material name="${props['visual']['base']['color']}"/>
       </visual>
 
       <collision>
         <geometry>
             <xacro:property name="mesh" value="${props['collision']['mesh']}" />
-          <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
+            <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
         </geometry>
         <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
       </collision>
@@ -46,7 +46,7 @@
           <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
         </geometry>
         <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
-        <material name="cover_color"> <color rgba="${props['visual']['cover']['color_rgb']} 1.0"/> </material>
+        <material name="${props['visual']['cover']['color']}"/>
       </visual>
     </link> 
 
@@ -63,11 +63,11 @@
     </joint>
 
     <gazebo reference="chassis_link">
-      <material>Gazebo/White</material>
+      <material>Gazebo/${props['visual']['base']['color']}</material>
     </gazebo>
 
     <gazebo reference="cover_link">
-      <material>Gazebo/Red</material>
+      <material>Gazebo/${props['visual']['cover']['color']}</material>
     </gazebo>
   
   </xacro:macro>

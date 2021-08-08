@@ -1,8 +1,8 @@
 front_wheels:
   mass: 0.3
-  inertia: {ixx: 0.00009165, ixy: 0.00000598, ixz: -0.00000180,
-                             iyy: 0.00003309, iyz: -0.00001473,
-                                              izz:  0.00008256}
+  inertia: {ixx: 1, ixy: 0, ixz: 0,
+                    iyy: 1, iyz: 0,
+                            izz:  1}
   diameter: 0.2
   lateral_friction: 0.93
   spinning_friction: 0.20
@@ -14,9 +14,9 @@ front_wheels:
 
 rear_wheels:
   mass: 0.3
-  inertia: {ixx: 0.00009165, ixy: 0.00000598, ixz: -0.00000180,
-                             iyy: 0.00003309, iyz: -0.00001473,
-                                              izz:  0.00008256}
+  inertia: {ixx: 1, ixy: 0, ixz: 0,
+                    iyy: 1, iyz: 0,
+                            izz:  1}
   diameter: 0.3
   lateral_friction: 0.93
   spinning_friction: 0.20
@@ -25,3 +25,6 @@ rear_wheels:
   visual_mesh: wheel.stl
   collision_mesh: wheel.stl
   color_rgb: "0.15 0.15 0.15"
+
+simulation:
+  driver: skid_steer_drive_controller

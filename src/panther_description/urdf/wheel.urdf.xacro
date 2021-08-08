@@ -7,19 +7,19 @@
     <xacro:property name="rpy" value="0 0 ${pi/2}" />
     <xacro:if value="${prefix == 'front_left'}">
       <xacro:property name="x" value="0.38" />
-      <xacro:property name="y" value="${common_props['base_link']['wheel_separation']/2}" />
+      <xacro:property name="y" value="${common_props['chassis']['wheel_separation']/2}" />
     </xacro:if>
     <xacro:if value="${prefix == 'front_right'}">
       <xacro:property name="x" value="0.38" />
-      <xacro:property name="y" value="-${common_props['base_link']['wheel_separation']/2}" />
+      <xacro:property name="y" value="-${common_props['chassis']['wheel_separation']/2}" />
     </xacro:if>
     <xacro:if value="${prefix == 'rear_left'}">
       <xacro:property name="x" value="-0.38" />
-      <xacro:property name="y" value="${common_props['base_link']['wheel_separation']/2}" />
+      <xacro:property name="y" value="${common_props['chassis']['wheel_separation']/2}" />
     </xacro:if>
     <xacro:if value="${prefix == 'rear_right'}">
       <xacro:property name="x" value="-0.38" />
-      <xacro:property name="y" value="-${common_props['base_link']['wheel_separation']/2}" />
+      <xacro:property name="y" value="-${common_props['chassis']['wheel_separation']/2}" />
     </xacro:if>
 
 
@@ -53,10 +53,10 @@
     </link>
 
     <joint name="${prefix}_wheel_joint" type="continuous">
-      <parent link="base_link" />
+      <parent link="chassis_link" />
       <child link="${prefix}_wheel_link" />
       <origin xyz="${x} ${y} 0" rpy="0 0 0" />
-      <axis xyz="1 0 0" />
+      <axis xyz="0 1 0" />
 
       <limit effort="${common_props['motors']['max_torque']}"
              velocity="${common_props['motors']['max_velocity']}" />
@@ -65,13 +65,14 @@
                 friction="${common_props['motors']['joint_friction']}"/>
     </joint>
 
-    <transmission name="${prefix}_wheel_transmission">
+    <transmission name="${prefix}_wheel_transmission" type="SimpleTransmission">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="${prefix}_wheel_joint">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
-      <actuator name="${prefix}_actuator">
+      <actuator name="${prefix}_wheel_actuator">
         <mechanicalReduction>1</mechanicalReduction>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </actuator>
     </transmission>
 

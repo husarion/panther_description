@@ -15,6 +15,7 @@
     <arg name="gui" value="$(arg gui)"/>
     <arg name="headless" value="$(arg headless)"/>
     <arg name="debug" value="$(arg debug)"/>
+    <arg name="verbose" value="true"/>
   </include>
 
 </launch>

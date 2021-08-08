@@ -11,7 +11,9 @@ RUN apt install -y git \
     python3-dev \
     python3-pip \
     python3-rospkg \
-    ros-$ROS_DISTRO-joint-state-publisher
+    ros-$ROS_DISTRO-joint-state-publisher \
+    ros-$ROS_DISTRO-ros-control \
+    ros-$ROS_DISTRO-ros-controllers
 
 # Python 3 dependencies
 RUN pip3 install \

@@ -27,4 +27,4 @@ rear_wheels:
   color: DarkGrey
 
 simulation:
-  driver: libgazebo_ros_skid_steer_drive
+  driver: libgazebo_ros_planar_move

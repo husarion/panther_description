@@ -4,7 +4,7 @@
 
   <xacro:arg name="panther_common_props_path" default="$(find panther_description)/config/panther_common.yaml" />
   <xacro:arg name="wheel_props_path" default="$(find panther_description)/config/classic_wheels_props.yaml" />
-  <xacro:arg name="use_gpu" default="false" />
+  <xacro:arg name="use_gpu" default="true" />
 
   <!-- IMPORT YAML CONFIGS -->
   <xacro:property name="panther_common_props_file" value="$(arg panther_common_props_path)"  />
@@ -31,7 +31,7 @@
 
   <!-- GAZEBO PLUGINS -->
   <xacro:gazebo.wheel_driver wheel_props="${wheel_props}" common_props="${panther_common_props}" />
-  <xacro:gazebo.rplidar_s1 xyz="0.2 0 0.14" rpy="0 0 0" use_gpu="$(arg use_gpu)" />
+  <xacro:gazebo.rplidar_s1 xyz="0.2 0 0.2" rpy="0 0 0" use_gpu="true" />
 
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">

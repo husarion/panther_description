@@ -1,20 +1,23 @@
-chassis:
-  mass: 20
+body:
+  mass: 43
   inertia: {ixx: 0.00009165, ixy:  0.00000598, ixz: -0.0000018,
             iyy: 0.00003309, iyz: -0.00001473, izz:  0.00008256}
-  wheel_separation: 0.8
+  wheel_separation: 0.697
   visual:
     cover:
-      mesh: body_top.stl
+      mesh: cover.stl
       color: Red
     base:
-      mesh: body_bottom.stl
+      mesh: body.stl
       color: White
+    rails:
+      mesh: rails.stl
+      color: Black
   collision:
-    mesh: body_bottom.stl
+    mesh: body_collision.stl
 
 motors:
-  max_torque: 10
-  max_velocity: 10
+  max_torque: 60
+  max_velocity: 2
   joint_damping: 0.0
   joint_friction: 0.0

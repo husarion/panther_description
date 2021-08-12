@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <!-- chassis defining macro -->
-  <xacro:macro name="chassis" params="props">
+  <!-- body defining macro -->
+  <xacro:macro name="body" params="props">
 
     <link name="base_link"></link> 
 
-    <link name="chassis_link">
+    <link name="body_link">
       <visual>
         <geometry>
             <xacro:property name="mesh" value="${props['visual']['base']['mesh']}" />
-            <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
+            <mesh filename="package://panther_description/meshes/${mesh}" scale="1 1 1" />
         </geometry>
         <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
         <material name="${props['visual']['base']['color']}"/>
@@ -19,7 +19,7 @@
       <collision>
         <geometry>
             <xacro:property name="mesh" value="${props['collision']['mesh']}" />
-            <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
+            <mesh filename="package://panther_description/meshes/${mesh}" scale="1 1 1" />
         </geometry>
         <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
       </collision>
@@ -43,31 +43,56 @@
       <visual>
         <geometry>
           <xacro:property name="mesh" value="${props['visual']['cover']['mesh']}" />
-          <mesh filename="package://panther_description/meshes/${mesh}" scale="0.001 0.001 0.001" />
+          <mesh filename="package://panther_description/meshes/${mesh}" scale="1 1 1" />
         </geometry>
         <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
         <material name="${props['visual']['cover']['color']}"/>
       </visual>
     </link> 
 
-    <joint name="base_link_to_chassis_joint" type="fixed">
+    <link name="rails_link">
+      <inertial>
+        <mass value="0.0000001" />
+        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+      </inertial>
+      <visual>
+        <geometry>
+          <xacro:property name="mesh" value="${props['visual']['rails']['mesh']}" />
+          <mesh filename="package://panther_description/meshes/${mesh}" scale="1 1 1" />
+        </geometry>
+        <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
+        <material name="${props['visual']['rails']['color']}"/>
+      </visual>
+    </link> 
+
+    <joint name="base_link_to_body_joint" type="fixed">
       <origin xyz="0 0 0" rpy="0 0 0" />
       <parent link="base_link" />
-      <child link="chassis_link" />
+      <child link="body_link" />
     </joint>
 
-    <joint name="chassis_to_cover_joint" type="fixed">
+    <joint name="body_to_cover_joint" type="fixed">
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <parent link="chassis_link" />
+      <parent link="body_link" />
       <child link="cover_link" />
     </joint>
 
-    <gazebo reference="chassis_link">
+    <joint name="body_to_rails_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="body_link" />
+      <child link="rails_link" />
+    </joint>
+
+    <gazebo reference="body_link">
       <material>Gazebo/${props['visual']['base']['color']}</material>
     </gazebo>
 
     <gazebo reference="cover_link">
       <material>Gazebo/${props['visual']['cover']['color']}</material>
+    </gazebo>
+
+    <gazebo reference="rails_link">
+      <material>Gazebo/${props['visual']['rails']['color']}</material>
     </gazebo>
   
   </xacro:macro>

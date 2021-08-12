@@ -4,8 +4,8 @@
   <xacro:include filename="$(find panther_description)/urdf/components/rplidar_a2.gazebo.xacro" />
   <xacro:include filename="$(find panther_description)/urdf/components/rplidar_a3.gazebo.xacro" />
   <xacro:include filename="$(find panther_description)/urdf/components/velodyne_puck.gazebo.xacro" />
+  <xacro:include filename="$(find panther_description)/urdf/components/ouster_os1_32.gazebo.xacro" />
   <xacro:include filename="$(find panther_description)/urdf/components/orbebec_astra.gazebo.xacro" />
-  <xacro:include filename="$(find panther_description)/urdf/components/ouster_os1_16.gazebo.xacro" />
 
   <xacro:macro name="wheel_driver" params="wheel_props common_props">
     <xacro:if value="${wheel_props['simulation']['driver'] == 'libgazebo_ros_skid_steer_drive'}">
@@ -13,8 +13,8 @@
         <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
           <updateRate>10.0</updateRate>
           <robotBaseFrame>base_link</robotBaseFrame>
-          <wheelSeparation>${common_props['chassis']['wheel_separation']}</wheelSeparation>
-          <wheelDiameter>${wheel_props['front_wheels']['diameter']}</wheelDiameter>
+          <wheelSeparation>${common_props['body']['wheel_separation']}</wheelSeparation>
+          <wheelDiameter>${wheel_props['wheels']['diameter']}</wheelDiameter>
           <torque>${common_props['motors']['max_torque']}</torque>
           <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
           <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>

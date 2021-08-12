@@ -6,15 +6,15 @@
         <geometry>
             <mesh filename="package://panther_description/meshes/components/orbebec_astra.dae" scale="0.001 0.001 0.001" />
         </geometry>
-        <origin xyz="-0.01 0 -0.03" rpy="${pi/2} 0 ${pi/2}"/>
+        <origin xyz="-0.01 0 0.025" rpy="${pi/2} 0 ${pi/2}"/>
         <material name="DarkGrey"/>
       </visual>
 
       <collision>
         <geometry>
-          <box size="0.165 0.03 0.04" />
+          <box size="0.165 0.04 0.05" />
         </geometry>
-        <origin xyz="0 0 0.02" rpy="0 0 0"/>
+        <origin xyz="-0.01 0 0.025" rpy="0 0 ${pi/2}"/>
       </collision>
 
       <inertial>
@@ -23,10 +23,18 @@
       </inertial>
     </link>
 
+    <link name="${prefix}_orbebec_astra_depth_link"></link>
+
     <joint name="base_link_to_${prefix}_orbebec_astra_link_joint" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
       <parent link="base_link" />
       <child link="${prefix}_orbebec_astra_link" />
+    </joint>
+
+    <joint name="${prefix}_orbebec_astra_depth_link_joint" type="fixed">
+      <origin xyz="0.01 0 0.035" rpy="${-pi/2} 0 ${-pi/2}" />
+      <parent link="${prefix}_orbebec_astra_link" />
+      <child link="${prefix}_orbebec_astra_depth_link" />
     </joint>
 
     <gazebo reference="${prefix}_orbebec_astra_link">
@@ -56,7 +64,7 @@
           <alwaysOn>true</alwaysOn>
           <updateRate>10.0</updateRate>
           <cameraName>camera</cameraName>
-          <frameName>camera_depth_frame</frameName>
+          <frameName>${prefix}_orbebec_astra_depth_link</frameName>
           <imageTopicName>rgb/image_raw</imageTopicName>
           <depthImageTopicName>depth/image_raw</depthImageTopicName>
           <pointCloudTopicName>depth/points</pointCloudTopicName>

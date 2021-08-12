@@ -13,18 +13,17 @@
     <link name="${prefix}_ouster_os1_32_link">
       <visual>
         <geometry>
-          <!-- <mesh filename="package://panther_description/meshes/components/ouster_os1_32.stl" scale="0.0001 0.0001 0.0001" /> -->
-          <cylinder radius="${0.0555/2}" length="0.051" />
+          <mesh filename="package://panther_description/meshes/components/ouster_os1_32.stl" scale="1 1 0.65" />
         </geometry>
-        <origin xyz="0 0 ${0.051/2}" rpy="0 0 -${pi/2}"/>
-        <material name="DarkGrey"/>
+        <origin xyz="0 0 0" rpy="0 0 ${pi/2}"/>
+        <material name="Grey"/>
       </visual>
 
       <collision>
         <geometry>
-          <cylinder radius="${0.0555/2}" length="0.051" />
+          <cylinder radius="${0.0753/2}" length="0.0435" />
         </geometry>
-        <origin xyz="0 0 ${0.051/2}" rpy="0 0 0"/>
+        <origin xyz="0 0 ${0.0435/2}" rpy="0 0 0"/>
       </collision>
 
       <inertial>
@@ -42,13 +41,13 @@
     </joint>
 
     <joint name="${prefix}_ouster_os1_32_laser_link_joint" type="fixed">
-      <origin xyz="0 0 0.0378" rpy="0 0 0" />
+      <origin xyz="0 0 0.023" rpy="0 0 0" />
       <parent link="${prefix}_ouster_os1_32_link" />
       <child link="${prefix}_ouster_os1_32_laser_link" />
     </joint>
 
     <gazebo reference="${prefix}_ouster_os1_32_link">
-      <material>Gazebo/DarkGrey</material>
+      <material>Gazebo/Grey</material>
     </gazebo>
 
     <gazebo reference="${prefix}_ouster_os1_32_laser_link">
@@ -72,14 +71,14 @@
             </vertical>
           </scan>
           <range>
-            <min>0.05</min>
-            <max>120.0</max>
-            <resolution>0.007</resolution>
+            <min>${0.0753/2+0.01}</min>
+            <max>100.0</max>
+            <resolution>0.003</resolution>
           </range>
           <noise>
             <type>gaussian</type>
             <mean>0.0</mean>
-            <stddev>0.007</stddev>
+            <stddev>0.008</stddev>
           </noise>
         </ray>
         <plugin name="gazebo_ros_head_rplidar_controller" filename="${plugin_file_name}">

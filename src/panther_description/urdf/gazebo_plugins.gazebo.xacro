@@ -44,5 +44,42 @@
         </plugin>
       </gazebo>
     </xacro:if>
+
+
+    <link name="imu">
+      <inertial>
+        <mass value="0.0000001" />
+        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+      </inertial>
+    </link>
+
+    <joint name="base_link_to_imu_link_joint" type="fixed">
+      <origin xyz="0.169 0.025 0.092" rpy="0 0 0" />
+      <parent link="base_link" />
+      <child link="imu" />
+    </joint>
+
+    <gazebo reference="imu">
+      <gravity>true</gravity>
+      <sensor name="imu_sensor" type="imu">
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <visualize>false</visualize>
+        <topic>imu/data</topic>
+        <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+          <topicName>imu/data</topicName>
+          <bodyName>imu</bodyName>
+          <updateRateHZ>125.0</updateRateHZ>
+          <gaussianNoise>${0.095*(pi/180.0)}</gaussianNoise>
+          <xyzOffset>0 0 0</xyzOffset>
+          <rpyOffset>0 0 0</rpyOffset>
+          <frameName>imu</frameName>
+          <initialOrientationAsReference>false</initialOrientationAsReference>
+        </plugin>
+        <pose>0 0 0 0 0 0</pose>
+      </sensor>
+    </gazebo>
+
+
   </xacro:macro>
 </robot>

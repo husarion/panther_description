@@ -15,7 +15,7 @@
         <geometry>
           <mesh filename="package://panther_description/meshes/components/velodyne_puck.stl" scale="0.025035 0.025035 0.025035" />
         </geometry>
-        <origin xyz="0 0 ${0.051/2}" rpy="${pi/2} 0 ${pi}"/>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi}"/>
         <material name="DarkGrey"/>
       </visual>
 
@@ -71,14 +71,14 @@
             </vertical>
           </scan>
           <range>
-            <min>0.2</min>
+            <min>${0.051+0.01}</min>
             <max>100.0</max>
-            <resolution>0.015</resolution>
+            <resolution>0.005</resolution>
           </range>
           <noise>
             <type>gaussian</type>
-            <mean>0.05</mean>
-            <stddev>0.03</stddev>
+            <mean>0.0</mean>
+            <stddev>0.016</stddev>
           </noise>
         </ray>
         <plugin name="gazebo_ros_head_rplidar_controller" filename="${plugin_file_name}">

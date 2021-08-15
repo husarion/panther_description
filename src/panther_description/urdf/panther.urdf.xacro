@@ -26,8 +26,8 @@
   <!-- WHEEL DECLARATION -->
   <xacro:wheel.wheel wheel_props="${wheel_props['wheels']}" common_props="${panther_common_props}" prefix="front_left" />
   <xacro:wheel.wheel wheel_props="${wheel_props['wheels']}" common_props="${panther_common_props}" prefix="front_right" />
-  <xacro:wheel.wheel wheel_props="${wheel_props['wheels']}"  common_props="${panther_common_props}" prefix="rear_left" />
-  <xacro:wheel.wheel wheel_props="${wheel_props['wheels']}"  common_props="${panther_common_props}" prefix="rear_right" />
+  <xacro:wheel.wheel wheel_props="${wheel_props['wheels']}" common_props="${panther_common_props}" prefix="rear_left" />
+  <xacro:wheel.wheel wheel_props="${wheel_props['wheels']}" common_props="${panther_common_props}" prefix="rear_right" />
 
   <!-- GAZEBO PLUGINS -->
   <xacro:gazebo.wheel_driver wheel_props="${wheel_props}" common_props="${panther_common_props}" />

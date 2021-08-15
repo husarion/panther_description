@@ -1,29 +1,15 @@
-front_wheels:
-  mass: 0.3
+wheels:
+  mass: 3
   inertia: {ixx: 1, ixy: 0, ixz: 0,
                     iyy: 1, iyz: 0,
                             izz: 1}
-  diameter: 0.2
-  lateral_friction: 0.93
-  spinning_friction: 0.20
+  diameter: 0.203
+  wheel_separation: 0.6785
+  lateral_friction: 2.93
+  spinning_friction: 1.20
   contact_stiffness: 10000000.0
   contact_damping: 1.0
-  visual_mesh: wheel.stl
-  collision_mesh: wheel.stl
-  color: DarkGrey
-
-rear_wheels:
-  mass: 0.3
-  inertia: {ixx: 1, ixy: 0, ixz: 0,
-                    iyy: 1, iyz: 0,
-                            izz: 1}
-  diameter: 0.3
-  lateral_friction: 0.93
-  spinning_friction: 0.20
-  contact_stiffness: 10000000.0
-  contact_damping: 1.0
-  visual_mesh: wheel.stl
-  collision_mesh: wheel.stl
+  mesh_folder: mecanum_wheels
   color: DarkGrey
 
 simulation:

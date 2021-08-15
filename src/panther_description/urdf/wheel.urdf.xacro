@@ -5,32 +5,33 @@
   <xacro:macro name="wheel" params="wheel_props common_props prefix">
 
     <xacro:property name="rpy" value="0 0 ${pi/2}" />
+    <xacro:property name="mesh_folder" value="${wheel_props['mesh_folder']}" />
     <xacro:if value="${prefix == 'front_left'}">
       <xacro:property name="x" value="0.22" />
-      <xacro:property name="y" value="${common_props['body']['wheel_separation']/2}" />
-      <xacro:property name="mesh" value="${wheel_props['visual_mesh_left']}" />
+      <xacro:property name="y" value="${wheel_props['wheel_separation']/2}" />
+      <xacro:property name="mesh" value="package://panther_description/meshes/${mesh_folder}/wheel_a.stl" />
     </xacro:if>
     <xacro:if value="${prefix == 'front_right'}">
       <xacro:property name="x" value="0.22" />
-      <xacro:property name="y" value="-${common_props['body']['wheel_separation']/2}" />
-      <xacro:property name="mesh" value="${wheel_props['visual_mesh_right']}" />
+      <xacro:property name="y" value="-${wheel_props['wheel_separation']/2}" />
+      <xacro:property name="mesh" value="package://panther_description/meshes/${mesh_folder}/wheel_b.stl" />
     </xacro:if>
     <xacro:if value="${prefix == 'rear_left'}">
       <xacro:property name="x" value="-0.22" />
-      <xacro:property name="y" value="${common_props['body']['wheel_separation']/2}" />
-      <xacro:property name="mesh" value="${wheel_props['visual_mesh_left']}" />
+      <xacro:property name="y" value="${wheel_props['wheel_separation']/2}" />
+      <xacro:property name="mesh" value="package://panther_description/meshes/${mesh_folder}/wheel_a.stl" />
     </xacro:if>
     <xacro:if value="${prefix == 'rear_right'}">
       <xacro:property name="x" value="-0.22" />
-      <xacro:property name="y" value="-${common_props['body']['wheel_separation']/2}" />
-      <xacro:property name="mesh" value="${wheel_props['visual_mesh_right']}" />
+      <xacro:property name="y" value="-${wheel_props['wheel_separation']/2}" />
+      <xacro:property name="mesh" value="package://panther_description/meshes/${mesh_folder}/wheel_b.stl" />
     </xacro:if>
 
 
     <link name="${prefix}_wheel_link">
        <visual>
         <geometry>
-            <mesh filename="package://panther_description/meshes/${mesh}" scale="1 1 1" />
+            <mesh filename="${mesh}" scale="1 1 1" />
         </geometry>
         <origin xyz="0 0 0" rpy="${rpy}"/>
         <material name="${wheel_props['color']}"/>
@@ -38,8 +39,7 @@
 
       <collision>
         <geometry>
-            <xacro:property name="mesh" value="${wheel_props['collision_mesh']}" />
-            <mesh filename="package://panther_description/meshes/${mesh}" scale="1 1 1" />
+            <mesh filename="package://panther_description/meshes/${mesh_folder}/collision.stl" scale="1 1 1" />
         </geometry>
         <origin xyz="0 0 0" rpy="${rpy}" />
       </collision>

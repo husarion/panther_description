@@ -1,8 +1,8 @@
 wheels:
   mass: 3
-  inertia: {ixx: 1, ixy: 0, ixz: 0,
-                    iyy: 1, iyz: 0,
-                            izz: 1}
+  inertia: {ixx: 0.066831, ixy: 0.000000, ixz: 0.000000,
+                           iyy: 0.038658, iyz: 0.000000,
+                                          izz: 0.038714}
   diameter: 0.365
   wheel_separation: 0.697
   lateral_friction: 2.93

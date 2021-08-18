@@ -10,7 +10,7 @@ wheels:
   contact_stiffness: 10000000.0
   contact_damping: 1.0
   mesh_folder: mecanum_wheels
-  color: DarkGrey
+  color: Grey
 
 simulation:
   driver: libgazebo_ros_planar_move

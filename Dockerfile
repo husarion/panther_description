@@ -13,7 +13,8 @@ RUN apt install -y git \
     python3-rospkg \
     ros-$ROS_DISTRO-joint-state-publisher \
     ros-$ROS_DISTRO-ros-control \
-    ros-$ROS_DISTRO-ros-controllers
+    ros-$ROS_DISTRO-ros-controllers \
+    ros-$ROS_DISTRO-hector-gazebo-plugins
 
 # Python 3 dependencies
 RUN pip3 install \

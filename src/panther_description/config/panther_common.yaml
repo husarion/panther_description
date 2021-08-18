@@ -1,8 +1,8 @@
 body:
   mass: 43
-  inertia: {ixx: 3.364000, ixy: -0.023480, ixz: 0.052320,
-                           iyy:  3.151000, iyz: 0.009337,
-                                           izz: 5.899000}
+  inertia: {ixx: 2.630036, ixy: -0.023480, ixz: 0.052320,
+                           iyy:  2.463509, iyz: 0.009337,
+                                           izz: 4.611945}
   visual:
     cover:
       mesh: cover.stl
@@ -17,7 +17,7 @@ body:
     mesh: body_collision.stl
 
 motors:
-  max_torque: 60
+  max_torque: 34.5
   max_velocity: 2
   joint_damping: 0.0
   joint_friction: 0.0

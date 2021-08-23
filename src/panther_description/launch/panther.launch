@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<launch>
-
-  <include file="$(find panther_description)/launch/panther_gazebo.launch"></include>
-
-  <include file="$(find panther_gazebo)/launch/panther_world.launch"></include>
-
-</launch>

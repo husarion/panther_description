@@ -1,135 +1,48 @@
-# panther_description #
+# panther_description
 
-URDF model for Gazebo integrated with ROS.
+URDF model of Panther robot
 
-## Installation. ## 
+## Required plugins
 
-We assume that you are working on Ubuntu 20.04 and already have installed ROS Noetic. If not, follow the [ROS install guide](http://wiki.ros.org/melodic/Installation/Ubuntu)
+panther_description package uses [hector_gazebo_plugins](http://wiki.ros.org/hector_gazebo_plugins) to simulate IMU and GPS.
 
-Prepare the repository:
-```
-cd ~
-mkdir ros_workspace
-mkdir ros_workspace/src
-cd ~/ros_workspace/src
-catkin_init_workspace
-cd ~/ros_workspace
-catkin_make
-```
+## Configuring
 
-Above commands should execute without any warnings or errors.
+### Xacro parameters
+
+- `panther_common_props_path` *(default: [panther_common.yaml](/panther_description/config/panther_common.yaml))* - description of basic Panther parameters such as mass, inertia, torque, meshes and colors. Available colors are defined in [materials.urdf.xacro](/panther_description/urdf/materials.urdf.xacro).
+
+- `wheel_props_path` *(default: [classic_wheels_props.yaml](/panther_description/config/classic_wheels_props.yaml))* - description of used wheel type.
+
+- `use_gpu` *(default: false)* - sets LIDAR sensors to use GPU enabled gazebo plugin.
 
 
-Clone this repository to your workspace:
+### Using different wheel types
 
-```
-cd ~/ros_workspace/src
-git clone https://github.com/husarion/panther_description.git
-```
+Wheel type is determined by `wheel_props_path` parameter. Those YAML files define all physical properties of wheels and their gazebo plugin.
 
-Install depencencies:
+Predefined wheels:
+- `WH01.yaml` - off-road skid drive wheels. Panther standard wheels
 
-```
-cd ~/ros_workspace
-rosdep install --from-paths src --ignore-src -r -y
-git clone https://github.com/ros/robot_state_publisher.git
-sudo apt install ros-noetic-openslam-gmapping
-git clone https://github.com/ros-perception/slam_gmapping.git 
-```
+- `WH02.yaml` - mecanum wheels 
 
-Build the workspace:
+- `WH04.yaml` - small skid drive wheels
 
-```
-cd ~/ros_workspace
-catkin_make
+### Changing sensor configuration
+
+Predefined sensors are:
+- Orbbec Astra
+- Slamtec RPLIDAR S1
+- Velodyne Puck
+- Ouster OS1 32
+
+You can add those sensors defining them in [panther.urdf.xacro](/panther_description/panther.urdf.xacro). Defining Velodyne Puck would look as follows.
+``` xml
+<xacro:gazebo.velodyne_puck xyz="0.185 0 0.17" rpy="0 0 0" use_gpu="$(arg use_gpu)" />
 ```
 
-From this moment you can use panther simulations. Please remember that each time, when you open new terminal window, you will need to load system variables:
+You can define multiple sensors by changing parameters for both LIDAR sensors and camera `prefix` and `topic` for LIDAR sensors. This way you will avoid collisions in link names and topics.
 
-```
-source ~/ros_workspace/devel/setup.sh
-```
-
-## How to use ##
-
-### Creating, saving and loading the Map ###
-
-Run the following commands below. Use the teleop to move the robot around to create an accurate and thorough map.
-
-In Terminal 1, launch the Gazebo simulation:
-
-```
-roslaunch panther_description panther_rviz_gmapping.launch
-```
-
-When you are satisfied with created map, you can save it. Open new terminal and save the map to some given path: 
-
-```
-rosrun map_server map_saver -f ~/ros_workspace/src/panther_description/src/panther_navigation/maps/test_map
-```
-
-To launch navigation use:
-```
-roslaunch panther_navigation panther_gazebo_nav.launch
-```
-
-Now to make saved map loading possible you have to close all previous terminals and run the following commands below. Once loaded, use rviz to set 2D Nav Goal and the robot will autonomously reach the indicated position
-
-In Terminal 1, launch the Gazebo simulation
-
-```
-roslaunch panther_description panther_rviz_amcl.launch
-```
-
-## Tips ##
-
-If you have any problems with laser scan it probably means that you don't have a dedicated graphic card (or lack appropriate drivers). If that's the case then you'll have to change couple of things in /panther_description/urdf/panther_gazebo file:
-
-Find:   `<!-- If you cant't use your GPU comment RpLidar using GPU and uncomment RpLidar using CPU gazebo plugin. -->`
-next coment RpLidar using GPU using `<!-- -->` from `<gazebo>` to `</gazebo>` like below:
-
- ```
- <!-- gazebo reference="rplidar">
-   <sensor type="gpu_ray" name="head_rplidar_sensor">
-     <pose>0 0 0 0 0 0</pose>
-     <visualize>false</visualize>
-     <update_rate>40</update_rate>
-     <ray>
-       <scan>
-         <horizontal>
-           <samples>720</samples>
-           <resolution>1</resolution>
-           <min_angle>-3.14159265</min_angle>
-           <max_angle>3.14159265</max_angle>
-         </horizontal>
-       </scan>
-       <range>
-         <min>0.2</min>
-         <max>30.0</max>
-         <resolution>0.01</resolution>
-       </range>
-       <noise>
-         <type>gaussian</type>
-         <mean>0.0</mean>
-         <stddev>0.01</stddev>
-       </noise>
-     </ray>
-     <plugin name="gazebo_ros_head_rplidar_controller" filename="libgazebo_ros_gpu_laser.so">
-       <topicName>/panther/laser/scan</topicName>
-       <frameName>rplidar</frameName>
-     </plugin>
-   </sensor>
- </gazebo -->
-```
-
-Now uncomment RpLidar using CPU plugin removing `<!-- -->`.
-
-If you want to make your laser scan visible just change:
-```
-<visualize>false</visualize>
-```
-to:
-```
-<visualize>true</visualize>
-```
-in the same plug in.
+For other depth cameras we suggest looking at official repositories:
+- [Intel RealSense](https://github.com/IntelRealSense/realsense-ros)
+- [Stereolabs ZED](https://github.com/stereolabs/zed-ros-wrapper)

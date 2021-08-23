@@ -10,9 +10,9 @@ panther_description package uses [hector_gazebo_plugins](http://wiki.ros.org/hec
 
 ### Xacro parameters
 
-- `panther_common_props_path` *(default: [panther_common.yaml](/panther_description/config/panther_common.yaml))* - description of basic Panther parameters such as mass, inertia, torque, meshes and colors. Available colors are defined in [materials.urdf.xacro](/panther_description/urdf/materials.urdf.xacro).
+- `panther_common_props_path` *(default: [panther_common.yaml](./panther_description/config/panther_common.yaml))* - description of basic Panther parameters such as mass, inertia, torque, meshes and colors. Available colors are defined in [materials.urdf.xacro](./panther_description/urdf/materials.urdf.xacro).
 
-- `wheel_props_path` *(default: [classic_wheels_props.yaml](/panther_description/config/classic_wheels_props.yaml))* - description of used wheel type.
+- `wheel_props_path` *(default: [classic_wheels_props.yaml](./panther_description/config/classic_wheels_props.yaml))* - description of used wheel type.
 
 - `use_gpu` *(default: false)* - sets LIDAR sensors to use GPU enabled gazebo plugin.
 
@@ -36,7 +36,7 @@ Predefined sensors are:
 - Velodyne Puck
 - Ouster OS1 32
 
-You can add those sensors defining them in [panther.urdf.xacro](/panther_description/panther.urdf.xacro). Defining Velodyne Puck would look as follows.
+You can add those sensors defining them in [panther.urdf.xacro](./panther_description/urdf/panther.urdf.xacro). Defining Velodyne Puck would look as follows.
 ``` xml
 <xacro:gazebo.velodyne_puck xyz="0.185 0 0.17" rpy="0 0 0" use_gpu="$(arg use_gpu)" />
 ```

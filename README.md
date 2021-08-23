@@ -12,7 +12,7 @@ panther_description package uses [hector_gazebo_plugins](http://wiki.ros.org/hec
 
 - `panther_common_props_path` *(default: [panther_common.yaml](./panther_description/config/panther_common.yaml))* - description of basic Panther parameters such as mass, inertia, torque, meshes and colors. Available colors are defined in [materials.urdf.xacro](./panther_description/urdf/materials.urdf.xacro).
 
-- `wheel_props_path` *(default: [classic_wheels_props.yaml](./panther_description/config/classic_wheels_props.yaml))* - description of used wheel type.
+- `wheel_props_path` *(default: [WH01.yaml](./panther_description/config/WH01.yaml))* - description of used wheel type.
 
 - `use_gpu` *(default: false)* - sets LIDAR sensors to use GPU enabled gazebo plugin.
 

@@ -46,3 +46,7 @@ You can define multiple sensors by changing parameters for both LIDAR sensors an
 For other depth cameras we suggest looking at official repositories:
 - [Intel RealSense](https://github.com/IntelRealSense/realsense-ros)
 - [Stereolabs ZED](https://github.com/stereolabs/zed-ros-wrapper)
+
+## Launch examples
+
+Since this repository contains only description of robot launch examples were moved to [panther_simulation/panther_gazebo](https://github.com/husarion/panther_simulation/tree/main/panther_gazebo) examples section.

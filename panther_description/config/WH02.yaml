@@ -9,7 +9,7 @@ wheels:
   spinning_friction: 1.20
   contact_stiffness: 10000000.0
   contact_damping: 1.0
-  mesh_folder: mecanum_wheels
+  mesh_folder: WH02
   color: Grey
 
 simulation:

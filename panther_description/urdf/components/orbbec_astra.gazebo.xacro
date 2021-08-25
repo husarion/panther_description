@@ -4,7 +4,7 @@
     <link name="${prefix}_orbbec_astra_link">
       <visual>
         <geometry>
-            <mesh filename="package://panther_description/meshes/components/orbbec_astra.dae" scale="0.001 0.001 0.001" />
+            <mesh filename="package://panther_description/meshes/components/orbbec_astra.stl" scale="0.001 0.001 0.001" />
         </geometry>
         <origin xyz="-0.01 0 0.025" rpy="${pi/2} 0 ${pi/2}"/>
         <material name="DarkGrey"/>

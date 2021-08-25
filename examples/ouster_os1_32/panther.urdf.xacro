@@ -3,7 +3,7 @@
 <robot name="panther" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:arg name="panther_common_props_path" default="$(find panther_description)/config/panther_common.yaml" />
-  <xacro:arg name="wheel_props_path" default="$(find panther_description)/config/classic_wheels_props.yaml" />
+  <xacro:arg name="wheel_props_path" default="$(find panther_description)/config/WH01.yaml" />
   <xacro:arg name="use_gpu" default="false" />
 
   <!-- IMPORT YAML CONFIGS -->
@@ -39,7 +39,5 @@
       <legacyModeNS>true</legacyModeNS>
     </plugin>
   </gazebo>
-
-
 
 </robot>

@@ -1,0 +1,23 @@
+body:
+  mass: 43
+  inertia: {ixx: 2.630036, ixy: -0.023480, ixz: 0.052320,
+                           iyy:  2.463509, iyz: 0.009337,
+                                           izz: 4.611945}
+  visual:
+    cover:
+      mesh: cover.stl
+      color: Red
+    base:
+      mesh: body.stl
+      color: White
+    rails:
+      mesh: rails.stl
+      color: Black
+  collision:
+    mesh: body_collision.stl
+
+motors:
+  max_torque: 34.5
+  max_velocity: 2
+  joint_damping: 0.0
+  joint_friction: 0.0

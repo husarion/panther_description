@@ -10,7 +10,7 @@
       <visual>
         <geometry>
             <xacro:property name="mesh" value="${props['visual']['base']['mesh']}" />
-            <mesh filename="package://panther_description/meshes/${mesh}" scale="1 1 1" />
+            <mesh filename="file://$(find panther_description)/models/panther//meshes/${mesh}" scale="1 1 1" />
         </geometry>
         <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
         <material name="${props['visual']['base']['color']}"/>
@@ -19,7 +19,7 @@
       <collision>
         <geometry>
             <xacro:property name="mesh" value="${props['collision']['mesh']}" />
-            <mesh filename="package://panther_description/meshes/${mesh}" scale="1 1 1" />
+            <mesh filename="file://$(find panther_description)/models/panther//meshes/${mesh}" scale="1 1 1" />
         </geometry>
         <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
       </collision>
@@ -43,7 +43,7 @@
       <visual>
         <geometry>
           <xacro:property name="mesh" value="${props['visual']['cover']['mesh']}" />
-          <mesh filename="package://panther_description/meshes/${mesh}" scale="1 1 1" />
+          <mesh filename="file://$(find panther_description)/models/panther/meshes/${mesh}" scale="1 1 1" />
         </geometry>
         <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
         <material name="${props['visual']['cover']['color']}"/>
@@ -58,7 +58,7 @@
       <visual>
         <geometry>
           <xacro:property name="mesh" value="${props['visual']['rails']['mesh']}" />
-          <mesh filename="package://panther_description/meshes/${mesh}" scale="1 1 1" />
+          <mesh filename="file://$(find panther_description)/models/panther//meshes/${mesh}" scale="1 1 1" />
         </geometry>
         <origin xyz="0 0 0" rpy=" ${pi/2} 0 ${pi/2}"/>
         <material name="${props['visual']['rails']['color']}"/>

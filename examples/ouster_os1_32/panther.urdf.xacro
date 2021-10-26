@@ -33,11 +33,4 @@
   <xacro:gazebo.wheel_driver wheel_props="${wheel_props}" common_props="${panther_common_props}" />
   <xacro:gazebo.ouster_os1_32 xyz="0.185 0 0.17" rpy="0 0 0" use_gpu="$(arg use_gpu)" />
 
-  <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
-      <legacyModeNS>true</legacyModeNS>
-    </plugin>
-  </gazebo>
-
 </robot>

@@ -3,17 +3,15 @@
   <xacro:macro name="velodyne_puck" params="xyz rpy use_gpu:=false prefix:=front topic:=laser/scan">
     <xacro:if value="${use_gpu}">
       <xacro:property name="ray_type" value="gpu_ray" />
-      <xacro:property name="plugin_file_name" value="libgazebo_ros_gpu_laser.so" />
     </xacro:if>
     <xacro:unless value="${use_gpu}">
       <xacro:property name="ray_type" value="ray" />
-      <xacro:property name="plugin_file_name" value="libgazebo_ros_laser.so" />
     </xacro:unless>
 
     <link name="${prefix}_velodyne_puck_link">
       <visual>
         <geometry>
-          <mesh filename="package://panther_description/meshes/components/velodyne_puck.stl" scale="0.025035 0.025035 0.025035" />
+          <mesh filename="file://$(find panther_description)/models/panther/meshes/components/velodyne_puck.stl" scale="0.025035 0.025035 0.025035" />
         </geometry>
         <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi}"/>
         <material name="DarkGrey"/>
@@ -54,7 +52,6 @@
       <sensor type="${ray_type}" name="${prefix}_velodyne_puck_sensor">
         <pose>0 0 0.0378 0 0 0</pose>
         <visualize>false</visualize>
-        <update_rate>10</update_rate>
         <ray>
           <scan>
             <horizontal>
@@ -75,15 +72,23 @@
             <max>100.0</max>
             <resolution>0.005</resolution>
           </range>
+
           <noise>
             <type>gaussian</type>
             <mean>0.0</mean>
             <stddev>0.0008</stddev>
           </noise>
         </ray>
-        <plugin name="gazebo_ros_head_rplidar_controller" filename="${plugin_file_name}">
-          <topicName>${topic}</topicName>
-          <frameName>${prefix}_velodyne_puck_laser_link</frameName>
+        
+        <update_rate>10</update_rate>
+
+        <plugin name="scan" filename="libgazebo_ros_ray_sensor.so">
+          <ros>
+            <namespace>/</namespace>
+            <argument>~/out:=${topic}</argument>
+          </ros>
+          <output_type>sensor_msgs/PointCloud2</output_type>
+          <frame_name>${prefix}_velodyne_puck_laser_link</frame_name>
         </plugin>
       </sensor>
     </gazebo> 

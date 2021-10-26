@@ -9,22 +9,22 @@
     <xacro:if value="${prefix == 'front_left'}">
       <xacro:property name="x" value="0.22" />
       <xacro:property name="y" value="${wheel_props['wheel_separation']/2}" />
-      <xacro:property name="mesh" value="package://panther_description/meshes/${mesh_folder}/wheel_a.stl" />
+      <xacro:property name="mesh" value="file://$(find panther_description)/models/panther/meshes/${mesh_folder}/wheel_a.stl" />
     </xacro:if>
     <xacro:if value="${prefix == 'front_right'}">
       <xacro:property name="x" value="0.22" />
       <xacro:property name="y" value="-${wheel_props['wheel_separation']/2}" />
-      <xacro:property name="mesh" value="package://panther_description/meshes/${mesh_folder}/wheel_b.stl" />
+      <xacro:property name="mesh" value="file://$(find panther_description)/models/panther/meshes/${mesh_folder}/wheel_b.stl" />
     </xacro:if>
     <xacro:if value="${prefix == 'rear_left'}">
       <xacro:property name="x" value="-0.22" />
       <xacro:property name="y" value="${wheel_props['wheel_separation']/2}" />
-      <xacro:property name="mesh" value="package://panther_description/meshes/${mesh_folder}/wheel_a.stl" />
+      <xacro:property name="mesh" value="file://$(find panther_description)/models/panther/meshes/${mesh_folder}/wheel_a.stl" />
     </xacro:if>
     <xacro:if value="${prefix == 'rear_right'}">
       <xacro:property name="x" value="-0.22" />
       <xacro:property name="y" value="-${wheel_props['wheel_separation']/2}" />
-      <xacro:property name="mesh" value="package://panther_description/meshes/${mesh_folder}/wheel_b.stl" />
+      <xacro:property name="mesh" value="file://$(find panther_description)/models/panther/meshes/${mesh_folder}/wheel_b.stl" />
     </xacro:if>
 
 
@@ -39,7 +39,7 @@
 
       <collision>
         <geometry>
-            <mesh filename="package://panther_description/meshes/${mesh_folder}/collision.stl" scale="1 1 1" />
+            <mesh filename="file://$(find panther_description)/models/panther/meshes/${mesh_folder}/collision.stl" scale="1 1 1" />
         </geometry>
         <origin xyz="0 0 0" rpy="${rpy}" />
       </collision>
@@ -68,17 +68,6 @@
                 friction="${common_props['motors']['joint_friction']}"/>
     </joint>
 
-    <transmission name="${prefix}_wheel_transmission" type="SimpleTransmission">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_wheel_joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}_wheel_actuator">
-        <mechanicalReduction>1</mechanicalReduction>
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </actuator>
-    </transmission>
-
     <gazebo reference="${prefix}_wheel_link">
       <mu1 value="${wheel_props['lateral_friction']}" />
       <mu2 value="${wheel_props['spinning_friction']}" />
@@ -87,11 +76,7 @@
       <fdir1 value="1 0 0"/>
       <material>Gazebo/${wheel_props['color']}</material>
     </gazebo>
-
-    <gazebo reference="${prefix}_wheel_joint">
-      <provideFeedback>true</provideFeedback>
-    </gazebo>
-
+    
   </xacro:macro>
 
 </robot>

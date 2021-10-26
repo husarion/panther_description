@@ -5,12 +5,12 @@ wheels:
                                           izz: 0.022510}
   diameter: 0.365
   wheel_separation: 0.697
-  lateral_friction: 2.93
-  spinning_friction: 1.20
+  lateral_friction: 0.5
+  spinning_friction: 0.5
   contact_stiffness: 10000000.0
   contact_damping: 1.0
   mesh_folder: WH01
   color: DarkGrey
 
 simulation:
-  driver: libgazebo_ros_skid_steer_drive
+  driver: libgazebo_ros_diff_drive

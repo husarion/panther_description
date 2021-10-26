@@ -12,8 +12,10 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY config meshes rviz urdf
+  DIRECTORY rviz models worlds
   DESTINATION share/${PROJECT_NAME}
 )
 
+ament_environment_hooks()
+ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/env-hooks/${PROJECT_NAME}.dsv.in")
 ament_package()

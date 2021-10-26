@@ -2,9 +2,9 @@
 
 <robot name="panther" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:arg name="panther_common_props_path" default="$(find panther_description)/config/panther_common.yaml" />
-  <xacro:arg name="wheel_props_path" default="$(find panther_description)/config/WH01.yaml" />
-  <xacro:arg name="use_gpu" default="false" />
+  <xacro:arg name="panther_common_props_path" default="$(find panther_description)/models/panther/config/panther_common.yaml" />
+  <xacro:arg name="wheel_props_path" default="$(find panther_description)/models/panther/config/WH01.yaml" />
+  <xacro:arg name="use_gpu" default="true" />
 
   <!-- IMPORT YAML CONFIGS -->
   <xacro:property name="panther_common_props_file" value="$(arg panther_common_props_path)"  />
@@ -15,10 +15,10 @@
 
 
   <!-- INCLUDE ROBOT PARTS DEFINITIONS -->
-  <xacro:include filename="$(find panther_description)/urdf/materials.urdf.xacro" />
-  <xacro:include filename="$(find panther_description)/urdf/body.urdf.xacro" ns="body" />
-  <xacro:include filename="$(find panther_description)/urdf/wheel.urdf.xacro" ns="wheel" />
-  <xacro:include filename="$(find panther_description)/urdf/gazebo_plugins.gazebo.xacro" ns="gazebo" />
+  <xacro:include filename="$(find panther_description)/models/panther/materials.urdf.xacro" />
+  <xacro:include filename="$(find panther_description)/models/panther/body.urdf.xacro" ns="body" />
+  <xacro:include filename="$(find panther_description)/models/panther/wheel.urdf.xacro" ns="wheel" />
+  <xacro:include filename="$(find panther_description)/models/panther/gazebo_plugins.gazebo.xacro" ns="gazebo" />
 
   <!-- BODY DECLARATION -->
   <xacro:body.body props="${panther_common_props['body']}" />
@@ -32,14 +32,6 @@
   <!-- GAZEBO PLUGINS -->
   <xacro:gazebo.wheel_driver wheel_props="${wheel_props}" common_props="${panther_common_props}" />
   <xacro:gazebo.rplidar_s1 xyz="0.185 0 0.17" rpy="0 0 0" use_gpu="$(arg use_gpu)" />
-
-  <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
-      <legacyModeNS>true</legacyModeNS>
-    </plugin>
-  </gazebo>
-
 
 
 </robot>

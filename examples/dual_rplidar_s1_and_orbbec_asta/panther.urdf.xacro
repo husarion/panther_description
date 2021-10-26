@@ -35,11 +35,4 @@
   <xacro:gazebo.rplidar_s1 xyz="-0.185 0 0.17" rpy="0 0 ${pi/2}" use_gpu="$(arg use_gpu)" prefix="rear" topic="laser/rear/scan" />
   <xacro:gazebo.orbbec_astra xyz="0.36 0 0.025" rpy="0 0 0" />
 
-  <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
-      <legacyModeNS>true</legacyModeNS>
-    </plugin>
-  </gazebo>
-
 </robot>

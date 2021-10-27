@@ -229,7 +229,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /received_global_plan
+        Value: /plan
       Value: true
   Enabled: true
   Global Options:
@@ -277,25 +277,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 10.838357925415039
+      Distance: 1.2546578645706177
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 2.0902979373931885
-        Y: 8.646686553955078
-        Z: -1.2053674459457397
+        X: 5.744471549987793
+        Y: 17.81490135192871
+        Z: 5.930004119873047
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3753986358642578
+      Pitch: 0.830398440361023
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz_default_plugins)
-      Yaw: 2.6085500717163086
+      Yaw: 3.5135529041290283
     Saved: ~
 Window Geometry:
   Displays:

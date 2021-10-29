@@ -32,9 +32,9 @@
 
     <link name="${prefix}_velodyne_puck_laser_link"></link>
 
-    <joint name="base_link_to_${prefix}_velodyne_puck_link_joint" type="fixed">
+    <joint name="body_link_to_${prefix}_velodyne_puck_link_joint" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
-      <parent link="base_link" />
+      <parent link="body_link" />
       <child link="${prefix}_velodyne_puck_link" />
     </joint>
 

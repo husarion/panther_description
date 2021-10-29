@@ -34,9 +34,9 @@
 
     <link name="${prefix}_ouster_os1_32_laser_link"></link>
 
-    <joint name="base_link_to_${prefix}_ouster_os1_32_link_joint" type="fixed">
+    <joint name="body_link_to_${prefix}_ouster_os1_32_link_joint" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
-      <parent link="base_link" />
+      <parent link="body_link" />
       <child link="${prefix}_ouster_os1_32_link" />
     </joint>
 

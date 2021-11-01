@@ -34,9 +34,9 @@
 
     <link name="${prefix}_ouster_os1_32_laser_link"></link>
 
-    <joint name="base_link_to_${prefix}_ouster_os1_32_link_joint" type="fixed">
+    <joint name="body_link_to_${prefix}_ouster_os1_32_link_joint" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
-      <parent link="base_link" />
+      <parent link="body_link" />
       <child link="${prefix}_ouster_os1_32_link" />
     </joint>
 
@@ -51,7 +51,7 @@
     </gazebo>
 
     <gazebo reference="${prefix}_ouster_os1_32_laser_link">
-      <sensor type="${ray_type}" name="${prefix}_ouster_os1_32_sensor">
+      <sensor type="ray" name="${prefix}_ouster_os1_32_sensor">
         <pose>0 0 0.0 0 0 0</pose>
         <visualize>false</visualize>
         <update_rate>10</update_rate>
@@ -81,9 +81,11 @@
             <stddev>0.0008</stddev>
           </noise>
         </ray>
-        <plugin name="gazebo_ros_head_rplidar_controller" filename="${plugin_file_name}">
+        <plugin name="gazebo_ros_block_laser_controller" filename="libgazebo_ros_block_laser.so">
           <topicName>${topic}</topicName>
           <frameName>${prefix}_ouster_os1_32_laser_link</frameName>
+          <gaussianNoise>0.0008</gaussianNoise>
+          <updateRate>10</updateRate>
         </plugin>
       </sensor>
     </gazebo> 

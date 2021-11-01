@@ -34,9 +34,9 @@
 
     <link name="${prefix}_rplidar_s1_laser_link"></link>
 
-    <joint name="base_link_to_${prefix}_rplidar_s1_link_joint" type="fixed">
+    <joint name="body_link_to_${prefix}_rplidar_s1_link_joint" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
-      <parent link="base_link" />
+      <parent link="body_link" />
       <child link="${prefix}_rplidar_s1_link" />
     </joint>
 

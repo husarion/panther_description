@@ -1,14 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:macro name="velodyne_puck" params="xyz rpy use_gpu:=false prefix:=front topic:=laser/scan">
-    <xacro:if value="${use_gpu}">
-      <xacro:property name="ray_type" value="gpu_ray" />
-      <xacro:property name="plugin_file_name" value="libgazebo_ros_gpu_laser.so" />
-    </xacro:if>
-    <xacro:unless value="${use_gpu}">
-      <xacro:property name="ray_type" value="ray" />
-      <xacro:property name="plugin_file_name" value="libgazebo_ros_laser.so" />
-    </xacro:unless>
 
     <link name="${prefix}_velodyne_puck_link">
       <visual>
@@ -34,9 +26,9 @@
 
     <link name="${prefix}_velodyne_puck_laser_link"></link>
 
-    <joint name="base_link_to_${prefix}_velodyne_puck_link_joint" type="fixed">
+    <joint name="body_link_to_${prefix}_velodyne_puck_link_joint" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
-      <parent link="base_link" />
+      <parent link="body_link" />
       <child link="${prefix}_velodyne_puck_link" />
     </joint>
 
@@ -51,7 +43,7 @@
     </gazebo>
 
     <gazebo reference="${prefix}_velodyne_puck_laser_link">
-      <sensor type="${ray_type}" name="${prefix}_velodyne_puck_sensor">
+      <sensor type="ray" name="${prefix}_velodyne_puck_sensor">
         <pose>0 0 0.0378 0 0 0</pose>
         <visualize>false</visualize>
         <update_rate>10</update_rate>
@@ -81,9 +73,11 @@
             <stddev>0.0008</stddev>
           </noise>
         </ray>
-        <plugin name="gazebo_ros_head_rplidar_controller" filename="${plugin_file_name}">
+        <plugin name="gazebo_ros_block_laser_controller" filename="libgazebo_ros_block_laser.so">
           <topicName>${topic}</topicName>
           <frameName>${prefix}_velodyne_puck_laser_link</frameName>
+          <gaussianNoise>0.0008</gaussianNoise>
+          <updateRate>10</updateRate>
         </plugin>
       </sensor>
     </gazebo> 

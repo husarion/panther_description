@@ -21,7 +21,7 @@
   <xacro:include filename="$(find panther_description)/urdf/gazebo_plugins.gazebo.xacro" ns="gazebo" />
 
   <!-- BODY DECLARATION -->
-  <xacro:body.body props="${panther_common_props['body']}" />
+  <xacro:body.body props="${panther_common_props['body']}" wheel_props="${wheel_props['wheels']}" />
 
   <!-- WHEEL DECLARATION -->
   <xacro:wheel.wheel wheel_props="${wheel_props['wheels']}" common_props="${panther_common_props}" prefix="front_left" />

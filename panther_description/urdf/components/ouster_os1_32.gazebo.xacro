@@ -10,7 +10,7 @@
       <xacro:property name="plugin_file_name" value="libgazebo_ros_laser.so" />
     </xacro:unless>
 
-    <link name="${prefix}_ouster_os1_32_link">
+    <link name="os_sensor">
       <visual>
         <geometry>
           <mesh filename="package://panther_description/meshes/components/ouster_os1_32.stl" scale="1 1 0.65" />
@@ -32,26 +32,26 @@
       </inertial>
     </link>
 
-    <link name="${prefix}_ouster_os1_32_laser_link"></link>
+    <link name="os_laser"></link>
 
-    <joint name="body_link_to_${prefix}_ouster_os1_32_link_joint" type="fixed">
+    <joint name="body_link_to_os_sensor_joint" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
       <parent link="body_link" />
-      <child link="${prefix}_ouster_os1_32_link" />
+      <child link="os_sensor" />
     </joint>
 
-    <joint name="${prefix}_ouster_os1_32_laser_link_joint" type="fixed">
+    <joint name="os_laser_joint" type="fixed">
       <origin xyz="0 0 0.023" rpy="0 0 0" />
-      <parent link="${prefix}_ouster_os1_32_link" />
-      <child link="${prefix}_ouster_os1_32_laser_link" />
+      <parent link="os_sensor" />
+      <child link="os_laser" />
     </joint>
 
-    <gazebo reference="${prefix}_ouster_os1_32_link">
+    <gazebo reference="os_sensor">
       <material>Gazebo/Grey</material>
     </gazebo>
 
-    <gazebo reference="${prefix}_ouster_os1_32_laser_link">
-      <sensor type="ray" name="${prefix}_ouster_os1_32_sensor">
+    <gazebo reference="os_laser">
+      <sensor type="ray" name="ouster_os1_32_sensor">
         <pose>0 0 0.0 0 0 0</pose>
         <visualize>false</visualize>
         <update_rate>10</update_rate>
@@ -83,7 +83,7 @@
         </ray>
         <plugin name="gazebo_ros_block_laser_controller" filename="libgazebo_ros_block_laser.so">
           <topicName>${topic}</topicName>
-          <frameName>${prefix}_ouster_os1_32_laser_link</frameName>
+          <frameName>os_laser</frameName>
           <gaussianNoise>0.0008</gaussianNoise>
           <updateRate>10</updateRate>
         </plugin>

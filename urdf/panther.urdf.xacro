@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<robot name="panther" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="use_sim" default="false" /> 
+  <xacro:arg name="use_gpu" default="false" /> 
+  <xacro:arg name="has_gps" default="false" /> 
+  <xacro:arg name="wheel_props_path" default="$(find panther_description)/urdf/config/WH01.yaml" />
+
+  <xacro:include filename="$(find panther_description)/urdf/panther_macro.urdf.xacro" ns="husarion" />
+  <xacro:husarion.panther_robot 
+    use_sim="$(arg use_sim)"
+    use_gpu="$(arg use_gpu)"
+    has_gps="$(arg has_gps)"
+    wheel_props_path="$(arg wheel_props_path)"
+  />
+
+  <xacro:include filename="$(find panther_description)/urdf/components/orbbec_astra.gazebo.xacro" ns="lidar" />
+  <xacro:lidar.orbbec_astra parent_link="cover_link" xyz="0.185 0.0 0.0" rpy="0.0 0.0 0.0" use_gpu="$(arg use_gpu)" />
+
+</robot>

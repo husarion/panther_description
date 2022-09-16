@@ -1,0 +1,14 @@
+wheels:
+  mass: 3
+  inertia: {ixx: 0.034850, ixy: 0.000000, ixz: 0.000000,
+                           iyy: 0.022510, iyz: 0.000000,
+                                          izz: 0.022510}
+  diameter: 0.3650
+  wheel_separation: 0.697
+  lateral_friction: 0.5
+  spinning_friction: 0.5
+  contact_stiffness: 10000000.0
+  contact_damping: 1.0
+  mesh_folder: WH01
+  color: DarkGrey
+  kinematics: classic

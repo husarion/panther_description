@@ -1,0 +1,16 @@
+wheels:
+  mass: 0.85
+  inertia: {ixx: 0.058491, ixy: 0.000000, ixz: 0.000000,
+                           iyy: 0.030992, iyz: 0.000000,
+                                          izz: 0.031012}
+  diameter: 0.2032
+  wheel_separation: 0.616
+  lateral_friction: 0.5
+  spinning_friction: 0.5
+  contact_stiffness: 10000000.0
+  contact_damping: 1.0
+  mesh_folder: WH04
+  color: DarkGrey
+
+simulation:
+  driver: libgazebo_ros_diff_drive

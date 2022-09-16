@@ -1,0 +1,16 @@
+wheels:
+  mass: 2.4
+  inertia: {ixx: 0.016496, ixy: 0.000000, ixz: 0.000000,
+                           iyy: 0.010050, iyz: 0.000000,
+                                          izz: 0.010068}
+  diameter: 0.2032
+  wheel_separation: 0.6785
+  lateral_friction: 0.5
+  spinning_friction: 0.5
+  contact_stiffness: 10000000.0
+  contact_damping: 1.0
+  mesh_folder: WH02
+  color: Grey
+
+simulation:
+  driver: libgazebo_ros_planar_move

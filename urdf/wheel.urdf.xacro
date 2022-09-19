@@ -7,26 +7,53 @@
     <xacro:property name="wheel_separation_x" value="0.44" />
 
     <xacro:property name="rpy" value="0 0 0" />
-    <xacro:property name="mesh_folder" value="${wheel_props['mesh_folder']}" />
     <xacro:if value="${prefix == 'front_left'}">
-      <xacro:property name="x" value="${wheel_separation_x/2}" />
-      <xacro:property name="y" value="${wheel_props['wheel_separation']/2}" />
-      <xacro:property name="mesh" value="file://$(find panther_description)/meshes/${mesh_folder}/wheel_a.dae" />
+      <xacro:property name="x" value="${wheel_separation_x/2.0}" />
+      <xacro:property name="y" value="${wheel_props['wheel_separation']/2.0}" />
+      <xacro:if value="${wheel_props['kinematics'] == 'classic'}">
+        <xacro:property name="mesh"
+          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_a.dae" />
+      </xacro:if>
+      <xacro:if value="${wheel_props['kinematics'] == 'mecanum'}">
+        <xacro:property name="mesh"
+          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_a.dae" />
+      </xacro:if>
     </xacro:if>
     <xacro:if value="${prefix == 'front_right'}">
-      <xacro:property name="x" value="${wheel_separation_x/2}" />
-      <xacro:property name="y" value="-${wheel_props['wheel_separation']/2}" />
-      <xacro:property name="mesh" value="file://$(find panther_description)/meshes/${mesh_folder}/wheel_b.dae" />
+      <xacro:property name="x" value="${wheel_separation_x/2.0}" />
+      <xacro:property name="y" value="-${wheel_props['wheel_separation']/2.0}" />
+      <xacro:if value="${wheel_props['kinematics'] == 'classic'}">
+        <xacro:property name="mesh"
+          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_b.dae" />
+      </xacro:if>
+      <xacro:if value="${wheel_props['kinematics'] == 'mecanum'}">
+        <xacro:property name="mesh"
+          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_b.dae" />
+      </xacro:if>
     </xacro:if>
     <xacro:if value="${prefix == 'rear_left'}">
-      <xacro:property name="x" value="-${wheel_separation_x/2}" />
-      <xacro:property name="y" value="${wheel_props['wheel_separation']/2}" />
-      <xacro:property name="mesh" value="file://$(find panther_description)/meshes/${mesh_folder}/wheel_a.dae" />
+      <xacro:property name="x" value="-${wheel_separation_x/2.0}" />
+      <xacro:property name="y" value="${wheel_props['wheel_separation']/2.0}" />
+      <xacro:if value="${wheel_props['kinematics'] == 'classic'}">
+        <xacro:property name="mesh" 
+          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_a.dae" />
+      </xacro:if>
+      <xacro:if value="${wheel_props['kinematics'] == 'mecanum'}">
+        <xacro:property name="mesh"
+          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_c.dae" />
+      </xacro:if>
     </xacro:if>
     <xacro:if value="${prefix == 'rear_right'}">
-      <xacro:property name="x" value="-${wheel_separation_x/2}" />
-      <xacro:property name="y" value="-${wheel_props['wheel_separation']/2}" />
-      <xacro:property name="mesh" value="file://$(find panther_description)/meshes/${mesh_folder}/wheel_b.dae" />
+      <xacro:property name="x" value="-${wheel_separation_x/2.0}" />
+      <xacro:property name="y" value="-${wheel_props['wheel_separation']/2.0}" />
+      <xacro:if value="${wheel_props['kinematics'] == 'classic'}">
+        <xacro:property name="mesh"
+          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_b.dae" />
+      </xacro:if>
+      <xacro:if value="${wheel_props['kinematics'] == 'mecanum'}">
+        <xacro:property name="mesh"
+          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_d.dae" />
+      </xacro:if>
     </xacro:if>
 
 
@@ -40,7 +67,7 @@
 
       <collision>
         <geometry>
-            <mesh filename="file://$(find panther_description)/meshes/${mesh_folder}/collision.stl" scale="1.0 1.0 1.0" />
+            <mesh filename="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/collision.stl" scale="1.0 1.0 1.0" />
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
       </collision>

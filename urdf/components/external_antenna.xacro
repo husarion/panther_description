@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="external_antenna"
+               params="parent_link xyz rpy
+                       tf_prefix:=None
+                       topic:=gps
+                       frame_id:=gps">
+
+    <xacro:if value="${tf_prefix == 'None'}">
+      <xacro:property name="tf_prefix_ext" value="" />
+    </xacro:if>
+    <xacro:unless value="${tf_prefix == 'None'}">
+      <xacro:property name="tf_prefix_ext" value="${tf_prefix}_" />
+    </xacro:unless>
+
+    <link name="${tf_prefix_ext}${frame_id}">
+      <visual>
+        <geometry>
+          <mesh filename="file://$(find panther_description)/meshes/components/external_antenna.stl" scale="0.001 0.001 0.001" />
+        </geometry>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <material name="DarkGrey"/>
+      </visual>
+
+      <collision>
+        <geometry>
+          <mesh filename="file://$(find panther_description)/meshes/components/external_antenna.stl" scale="0.001 0.001 0.001" />
+        </geometry>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      </collision>
+
+      <inertial>
+          <mass value="0.105" />
+          <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+      </inertial>
+    </link>
+
+    <joint name="${parent_link}_to_${tf_prefix_ext}${frame_id}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent_link}" />
+      <child link="${tf_prefix_ext}${frame_id}" />
+    </joint>
+
+    <!-- based on Teltonika RUTX11 datasheet and measuremets-->
+    <gazebo>
+      <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
+        <updateRate>5</updateRate>
+        <robotNamespace>/</robotNamespace>
+        <bodyName>${tf_prefix_ext}${frame_id}</bodyName>
+        <frameId>${tf_prefix_ext}${frame_id}</frameId>
+        <topicName>/${topic}/fix</topicName>
+        <velocityTopicName>/${topic}/vel</velocityTopicName>
+        <referenceLatitude>53.1978</referenceLatitude>
+        <referenceLongitude>18.3735</referenceLongitude>
+        <referenceHeading>0</referenceHeading>
+        <referenceAltitude>0</referenceAltitude>
+        <drift>0.0001 0.0001 0.0001</drift>
+        <gaussianNoise>3.0 3.0 3.0</gaussianNoise>
+      </plugin>
+    </gazebo>
+  </xacro:macro>
+</robot>

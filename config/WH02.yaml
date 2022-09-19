@@ -9,8 +9,6 @@ wheels:
   spinning_friction: 0.5
   contact_stiffness: 10000000.0
   contact_damping: 1.0
-  mesh_folder: WH02
-  color: Grey
-
-simulation:
-  driver: libgazebo_ros_planar_move
+  mesh_package: panther_description
+  folder_path: meshes/WH02
+  kinematics: mecanum

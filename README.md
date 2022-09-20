@@ -9,8 +9,10 @@ export GAZEBO_VERSION=ignition-gazebo
 # For Gazebo Classic
 export GAZEBO_VERSION=gazebo-classic
 ```
+In order to build the package run:
+
 ``` bash
-vcs import < components.repos src
+vcs import < src/panther_description/components.repos src
 rosdep update --rosdistro $ROS_DISTRO
 rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
 colcon build

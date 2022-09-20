@@ -1,1 +1,9 @@
 repositories:
+  hector_gazebo:
+    type: git
+    url: https://github.com/tu-darmstadt-ros-pkg/hector_gazebo.git
+    version: foxy-devel
+  ros_components_description:
+    type: git
+    url: https://github.com/husarion/ros_components_description.git
+    version: ros2

@@ -1,52 +1,64 @@
 # panther_description
 
-URDF model of Panther robot
+## Installation
 
-## Required plugins
-
-panther_description package uses [hector_gazebo_plugins](http://wiki.ros.org/hector_gazebo_plugins) to simulate IMU and GPS.
-
-## Configuring
-
-### Xacro parameters
-
-- `panther_common_props_path` *(default: [panther_common.yaml](./panther_description/config/panther_common.yaml))* - description of basic Panther parameters such as mass, inertia, torque, meshes and colors. Available colors are defined in [materials.urdf.xacro](./panther_description/urdf/materials.urdf.xacro).
-
-- `wheel_props_path` *(default: [WH01.yaml](./panther_description/config/WH01.yaml))* - description of used wheel type.
-
-- `use_gpu` *(default: false)* - sets LIDAR sensors to use GPU enabled gazebo plugin.
-
-
-### Using different wheel types
-
-Wheel type is determined by `wheel_props_path` parameter. Those YAML files define all physical properties of wheels and their gazebo plugin.
-
-Predefined wheels:
-- `WH01.yaml` - off-road skid drive wheels. Panther standard wheels
-
-- `WH02.yaml` - mecanum wheels 
-
-- `WH04.yaml` - small skid drive wheels
-
-### Changing sensor configuration
-
-Predefined sensors are:
-- Orbbec Astra
-- Slamtec RPLIDAR S1
-- Velodyne Puck
-- Ouster OS1 32
-
-You can add those sensors defining them in [panther.urdf.xacro](./panther_description/urdf/panther.urdf.xacro). Defining Velodyne Puck would look as follows.
-``` xml
-<xacro:gazebo.velodyne_puck xyz="0.185 0 0.17" rpy="0 0 0" use_gpu="$(arg use_gpu)" />
+This package relates to other repositories that have to be build from source. It also requires user to select which Gazebo one want to use. To select Gazebo vertion run:
+``` bash
+# For Ignition Gazebo
+export GAZEBO_VERSION=ignition-gazebo
+# For Gazebo Classic
+export GAZEBO_VERSION=gazebo-classic
+```
+``` bash
+vcs import < components.repos src
+rosdep update --rosdistro $ROS_DISTRO
+rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
+colcon build
 ```
 
-You can define multiple sensors by changing parameters for both LIDAR sensors and camera `prefix` and `topic` for LIDAR sensors. This way you will avoid collisions in link names and topics.
+## Usage
 
-For other depth cameras we suggest looking at official repositories:
-- [Intel RealSense](https://github.com/IntelRealSense/realsense-ros)
-- [Stereolabs ZED](https://github.com/stereolabs/zed-ros-wrapper)
+Basic Panther configuration can be found in file [panther.urdf.xacro](./panther_description/urdf/panther.urdf.xacro). This is example configuration showing how to use the model. This can be used to import in launch files as a base line model. For more advanced usecases [panther_macro.urdf.xacro](./panther_description/urdf/panther_macro.urdf.xacro) is designed to be integrated into custom robot configurations.
 
-## Launch examples
+## Parameters
 
-Since this repository contains only description of robot launch examples were moved to [panther_simulation/panther_gazebo](https://github.com/husarion/panther_simulation/tree/main/panther_gazebo) examples section.
+Arguments passed to the [panther.urdf.xacro](./panther_description/urdf/panther.urdf.xacro) are the same as parameters of [panther_macro.urdf.xacro](./panther_description/urdf/panther_macro.urdf.xacro) thus this section covers both of them.
+
+
+- `use_sim` *(default: false)* - Changes between *ros2_control* for simulation and hardware **[TO BE IMPLEMENTED]**.
+- `use_gpu` *(default: false)* - Turns on GPU acceleration for sensors.
+- `dual_bat` *(default: false)* - Changes inertia and mass for robot body to match 2 batteries setup.
+- `imu_pos_x` *(default: 0.169)* - **x** coordinate of IMU sensor in relation to `body_link`.
+- `imu_pos_y` *(default: 0.025)* - **y** coordinate of IMU sensor in relation to `body_link`.
+- `imu_pos_z` *(default: 0.092)* - **z** coordinate of IMU sensor in relation to `body_link`.
+- `imu_rot_r` *(default: 0.0 )* - roll rotation of IMU sensor in relation to `body_link`.
+- `imu_rot_p` *(default: 0.0)* - pitch rotation of IMU sensor in relation to `body_link`.
+- `imu_rot_y`  *(default: 0.0)* - yaw rotation of IMU sensor in relation to `body_link`.
+- `wheel_props_path` *(default: $(find panther_description)/config/WH01.yaml)* - absolute path to YAML file defining wheel properties.
+- `simulation_engine` *(default: gazebo-classic)* - physics engine to select plugins for. Supported engines: `gazebo-classic` **[MORE ENGINES TO BE IMPLEMENTED]**.
+
+
+Parameter `wheel_props_path` allows to use non standard wheels with Panther robot without modyfying URDF file. Syntax is following:
+- `mass` - wheel mass in **[Kg]**.
+- `inertia` - diagonal of inertia tensor in **[Kg m^2]**. required subfileds:
+  - `ixx` - inertia alongside axis **x**.
+  - `iyy` - inertia alongside axis **y**.
+  - `izz` - inertia alongside axis **z**.
+- `inertia_y_offset` - Offset of center of mass in **y** direction in **[m]**.
+- `diameter` - wheel diameter.
+- `wheel_separation` - separation of wheels alongisde *y* axis.
+- `mesh_package` - ROS package name to search for custom meshes. Used in evaluation **$(find my_amazing_package)/**.
+- `folder_path` - path used to search for mesh files within ROS package.
+- `kinematics` - kinematics type. Possible options: `differential`, `mecanum`.
+
+Wheels have to be named as follows:
+- `collision.stl` - wheel collision mesh.
+- `wheel_a.dae` - front, left wheel visual mesh.
+- `wheel_b.dae` - front, right wheel visual mesh.
+- `wheel_c.dae` - rear, left wheel visual mesh.
+- `wheel_d.dae` - rear, right wheel visual mesh.
+
+
+## Sensor configuration
+
+Sensors are defined in [husarion/ros_components_description](https://github.com/husarion/ros_components_description) repository. Which is downloaded by VCS in the installation step. Guide on how to combine those sensors with the robot will be written soon.

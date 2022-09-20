@@ -25,10 +25,14 @@
     imu_rot_p="$(arg imu_rot_p)"
     imu_rot_y="$(arg imu_rot_y)"
     wheel_props_path="$(arg wheel_props_path)"
-    simulation_engine="$(arg simulation_engine)"
-  />
+    simulation_engine="$(arg simulation_engine)" />
 
-  <!-- <xacro:include filename="$(find components_description)/urdf/orbbec_astra.gazebo.xacro" ns="lidar" /> -->
-  <!-- <xacro:lidar.orbbec_astra parent_link="cover_link" xyz="0.185 0.0 0.0" rpy="0.0 0.0 0.0" use_gpu="$(arg use_gpu)" /> -->
+  <xacro:include filename="$(find ros_components_description)/urdf/rplidar_s1.gazebo.xacro" ns="lidar" />
+  <xacro:lidar.rplidar_s1
+    parent_link="cover_link"
+    xyz="0.185 0.0 0.0"
+    rpy="0.0 0.0 0.0"
+    use_gpu="$(arg use_gpu)"
+    simulation_engine="$(arg simulation_engine)" />
 
 </robot>

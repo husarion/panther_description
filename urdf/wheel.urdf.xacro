@@ -10,50 +10,30 @@
     <xacro:if value="${prefix == 'front_left'}">
       <xacro:property name="x" value="${wheel_separation_x/2.0}" />
       <xacro:property name="y" value="${wheel_props['wheel_separation']/2.0}" />
-      <xacro:if value="${wheel_props['kinematics'] == 'classic'}">
-        <xacro:property name="mesh"
-          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_a.dae" />
-      </xacro:if>
-      <xacro:if value="${wheel_props['kinematics'] == 'mecanum'}">
-        <xacro:property name="mesh"
-          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_a.dae" />
-      </xacro:if>
+      <xacro:property name="inertia_y_offset" value="${wheel_props['inertia_y_offset']}" />
+      <xacro:property name="mesh"
+        value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_a.dae" />
     </xacro:if>
     <xacro:if value="${prefix == 'front_right'}">
       <xacro:property name="x" value="${wheel_separation_x/2.0}" />
       <xacro:property name="y" value="-${wheel_props['wheel_separation']/2.0}" />
-      <xacro:if value="${wheel_props['kinematics'] == 'classic'}">
-        <xacro:property name="mesh"
-          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_b.dae" />
-      </xacro:if>
-      <xacro:if value="${wheel_props['kinematics'] == 'mecanum'}">
-        <xacro:property name="mesh"
-          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_b.dae" />
-      </xacro:if>
+      <xacro:property name="inertia_y_offset" value="${-wheel_props['inertia_y_offset']}" />
+      <xacro:property name="mesh"
+        value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_b.dae" />
     </xacro:if>
     <xacro:if value="${prefix == 'rear_left'}">
       <xacro:property name="x" value="-${wheel_separation_x/2.0}" />
       <xacro:property name="y" value="${wheel_props['wheel_separation']/2.0}" />
-      <xacro:if value="${wheel_props['kinematics'] == 'classic'}">
-        <xacro:property name="mesh" 
-          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_a.dae" />
-      </xacro:if>
-      <xacro:if value="${wheel_props['kinematics'] == 'mecanum'}">
-        <xacro:property name="mesh"
-          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_c.dae" />
-      </xacro:if>
+      <xacro:property name="inertia_y_offset" value="${wheel_props['inertia_y_offset']}" />
+      <xacro:property name="mesh"
+        value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_c.dae" />
     </xacro:if>
     <xacro:if value="${prefix == 'rear_right'}">
       <xacro:property name="x" value="-${wheel_separation_x/2.0}" />
       <xacro:property name="y" value="-${wheel_props['wheel_separation']/2.0}" />
-      <xacro:if value="${wheel_props['kinematics'] == 'classic'}">
-        <xacro:property name="mesh"
-          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_b.dae" />
-      </xacro:if>
-      <xacro:if value="${wheel_props['kinematics'] == 'mecanum'}">
-        <xacro:property name="mesh"
-          value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_d.dae" />
-      </xacro:if>
+      <xacro:property name="inertia_y_offset" value="${-wheel_props['inertia_y_offset']}" />
+      <xacro:property name="mesh"
+        value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_d.dae" />
     </xacro:if>
 
 
@@ -73,13 +53,14 @@
       </collision>
 
       <inertial>
-          <mass value="${wheel_props['mass']}" />
-          <inertia ixx="${wheel_props['inertia']['ixx']}"
-                   ixy="${wheel_props['inertia']['ixy']}"
-                   ixz="${wheel_props['inertia']['ixz']}"
-                   iyy="${wheel_props['inertia']['iyy']}"
-                   iyz="${wheel_props['inertia']['iyz']}"
-                   izz="${wheel_props['inertia']['izz']}" />
+        <origin xyz="0.0 ${inertia_y_offset} 0.0" rpy="0.0 0.0 0.0"/>
+        <mass value="${wheel_props['mass']}" />
+        <inertia ixx="${wheel_props['inertia']['ixx']}"
+                 ixy="0.0"
+                 ixz="0.0"
+                 iyy="${wheel_props['inertia']['iyy']}"
+                 iyz="0.0"
+                 izz="${wheel_props['inertia']['izz']}" />
       </inertial>
     </link>
 

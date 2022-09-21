@@ -4,7 +4,6 @@
 
   <xacro:macro name="panther_robot" 
                params="use_sim:=false
-                       use_gpu:=false
                        dual_bat:=false
                        imu_pos_x:=0.169 
                        imu_pos_y:=0.025

@@ -9,8 +9,10 @@ export GAZEBO_VERSION=ignition-gazebo
 # For Gazebo Classic
 export GAZEBO_VERSION=gazebo-classic
 ```
+In order to build the package run:
+
 ``` bash
-vcs import < components.repos src
+vcs import < src/panther_description/components.repos src
 rosdep update --rosdistro $ROS_DISTRO
 rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
 colcon build
@@ -18,11 +20,11 @@ colcon build
 
 ## Usage
 
-Basic Panther configuration can be found in file [panther.urdf.xacro](./panther_description/urdf/panther.urdf.xacro). This is example configuration showing how to use the model. This can be used to import in launch files as a base line model. For more advanced usecases [panther_macro.urdf.xacro](./panther_description/urdf/panther_macro.urdf.xacro) is designed to be integrated into custom robot configurations.
+Basic Panther configuration can be found in file [panther.urdf.xacro](./urdf/panther.urdf.xacro). This is example configuration showing how to use the model. This can be used to import in launch files as a base line model. For more advanced usecases [panther_macro.urdf.xacro](./urdf/panther_macro.urdf.xacro) is designed to be integrated into custom robot configurations.
 
 ## Parameters
 
-Arguments passed to the [panther.urdf.xacro](./panther_description/urdf/panther.urdf.xacro) are the same as parameters of [panther_macro.urdf.xacro](./panther_description/urdf/panther_macro.urdf.xacro) thus this section covers both of them.
+Arguments passed to the [panther.urdf.xacro](./urdf/panther.urdf.xacro) are the same as parameters of [panther_macro.urdf.xacro](./urdf/panther_macro.urdf.xacro) thus this section covers both of them.
 
 
 - `use_sim` *(default: false)* - Changes between *ros2_control* for simulation and hardware **[TO BE IMPLEMENTED]**.

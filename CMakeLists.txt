@@ -4,7 +4,7 @@ project(panther_description)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY meshes urdf config rviz worlds
+  DIRECTORY meshes urdf config rviz
   DESTINATION share/${PROJECT_NAME}
 )
 

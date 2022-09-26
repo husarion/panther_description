@@ -4,7 +4,8 @@
                params="parent_link xyz rpy
                        tf_prefix:=None
                        topic:=gps
-                       frame_id:=gps">
+                       frame_id:=gps
+                       simulation_engine:=gazebo-classic">
 
     <xacro:if value="${tf_prefix == 'None'}">
       <xacro:property name="tf_prefix_ext" value="" />
@@ -13,10 +14,10 @@
       <xacro:property name="tf_prefix_ext" value="${tf_prefix}_" />
     </xacro:unless>
 
-    <link name="${tf_prefix_ext}${frame_id}">
+    <link name="${tf_prefix_ext}external_antenna_link">
       <visual>
         <geometry>
-          <mesh filename="file://$(find panther_description)/meshes/components/external_antenna.stl" scale="0.001 0.001 0.001" />
+          <mesh filename="file://$(find panther_description)/meshes/components/external_antenna.dae" />
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         <material name="DarkGrey"/>
@@ -24,7 +25,7 @@
 
       <collision>
         <geometry>
-          <mesh filename="file://$(find panther_description)/meshes/components/external_antenna.stl" scale="0.001 0.001 0.001" />
+          <mesh filename="file://$(find panther_description)/meshes/components/external_antenna.dae" />
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
       </collision>
@@ -35,9 +36,17 @@
       </inertial>
     </link>
 
-    <joint name="${parent_link}_to_${tf_prefix_ext}${frame_id}_joint" type="fixed">
+    <joint name="${parent_link}_to_${tf_prefix_ext}external_antenna_link_joint" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
       <parent link="${parent_link}" />
+      <child link="${tf_prefix_ext}external_antenna_link" />
+    </joint>
+
+    <link name="${tf_prefix_ext}${frame_id}"></link>
+
+    <joint name="${tf_prefix_ext}external_antenna_link_to_${tf_prefix_ext}${frame_id}_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+      <parent link="${tf_prefix_ext}external_antenna_link" />
       <child link="${tf_prefix_ext}${frame_id}" />
     </joint>
 

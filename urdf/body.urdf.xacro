@@ -3,7 +3,7 @@
 
   <!-- body defining macro -->
   <xacro:macro name="body" params="
-    wheel_diameter simulation_engine
+    wheel_radius simulation_engine
     imu_pos_x imu_pos_y imu_pos_z
     imu_rot_r imu_rot_p imu_rot_y" >
 
@@ -12,14 +12,14 @@
     <link name="body_link">
       <visual>
         <geometry>
-          <mesh filename="file://$(find panther_description)/meshes/body.dae" scale="1.0 1.0 1.0" />
+          <mesh filename="file://$(find panther_description)/meshes/body.dae" />
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
       </visual>
 
       <collision>
         <geometry>
-          <mesh filename="file://$(find panther_description)/meshes/body_collision.stl" scale="1.0 1.0 1.0" />
+          <mesh filename="file://$(find panther_description)/meshes/body_collision.stl" />
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
       </collision>
@@ -39,7 +39,7 @@
     <link name="cover_link"></link>
 
     <joint name="base_link_to_body_link_joint" type="fixed">
-      <origin xyz="0.0 0.0 ${wheel_diameter/2.0}" rpy="0.0 0.0 0.0" />
+      <origin xyz="0.0 0.0 ${wheel_radius}" rpy="0.0 0.0 0.0" />
       <parent link="base_link" />
       <child link="body_link" />
     </joint>

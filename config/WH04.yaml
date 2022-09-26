@@ -1,9 +1,10 @@
-wheels:
-  mass: 0.85
-  inertia: {ixx: 0.058491, iyy: 0.030992, izz: 0.031012}
-  inertia_y_offset: 0.0
-  diameter: 0.2032
-  wheel_separation: 0.616
-  mesh_package: panther_description
-  folder_path: meshes/WH04
-  kinematics: differential
+/**:
+  ros__parameters:
+    wheel_radius: 0.1016
+    wheel_separation: 0.616
+    mass: 0.85
+    inertia: {ixx: 0.058491, iyy: 0.030992, izz: 0.031012}
+    inertia_y_offset: 0.0
+    mesh_package: panther_description
+    folder_path: meshes/WH04
+    kinematics: differential

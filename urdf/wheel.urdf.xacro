@@ -2,69 +2,57 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- wheel defining macro -->
-  <xacro:macro name="wheel" params="wheel_props prefix">
+  <xacro:macro name="wheel" params="wheel_config prefix wheel_separation_x">
 
-    <xacro:property name="wheel_separation_x" value="0.44" />
-
-    <xacro:property name="rpy" value="0 0 0" />
-    <xacro:if value="${prefix == 'front_left'}">
+    <xacro:if value="${prefix == 'fl'}">
       <xacro:property name="x" value="${wheel_separation_x/2.0}" />
-      <xacro:property name="y" value="${wheel_props['wheel_separation']/2.0}" />
-      <xacro:property name="inertia_y_offset" value="${wheel_props['inertia_y_offset']}" />
-      <xacro:property name="mesh"
-        value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_a.dae" />
+      <xacro:property name="y" value="${wheel_config['wheel_separation']/2.0}" />
+      <xacro:property name="inertia_y_offset" value="${wheel_config['inertia_y_offset']}" />
     </xacro:if>
-    <xacro:if value="${prefix == 'front_right'}">
+    <xacro:if value="${prefix == 'fr'}">
       <xacro:property name="x" value="${wheel_separation_x/2.0}" />
-      <xacro:property name="y" value="-${wheel_props['wheel_separation']/2.0}" />
-      <xacro:property name="inertia_y_offset" value="${-wheel_props['inertia_y_offset']}" />
-      <xacro:property name="mesh"
-        value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_b.dae" />
+      <xacro:property name="y" value="-${wheel_config['wheel_separation']/2.0}" />
+      <xacro:property name="inertia_y_offset" value="${-wheel_config['inertia_y_offset']}" />
     </xacro:if>
-    <xacro:if value="${prefix == 'rear_left'}">
+    <xacro:if value="${prefix == 'rl'}">
       <xacro:property name="x" value="-${wheel_separation_x/2.0}" />
-      <xacro:property name="y" value="${wheel_props['wheel_separation']/2.0}" />
-      <xacro:property name="inertia_y_offset" value="${wheel_props['inertia_y_offset']}" />
-      <xacro:property name="mesh"
-        value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_c.dae" />
+      <xacro:property name="y" value="${wheel_config['wheel_separation']/2.0}" />
+      <xacro:property name="inertia_y_offset" value="${wheel_config['inertia_y_offset']}" />
     </xacro:if>
-    <xacro:if value="${prefix == 'rear_right'}">
+    <xacro:if value="${prefix == 'rr'}">
       <xacro:property name="x" value="-${wheel_separation_x/2.0}" />
-      <xacro:property name="y" value="-${wheel_props['wheel_separation']/2.0}" />
-      <xacro:property name="inertia_y_offset" value="${-wheel_props['inertia_y_offset']}" />
-      <xacro:property name="mesh"
-        value="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/wheel_d.dae" />
+      <xacro:property name="y" value="-${wheel_config['wheel_separation']/2.0}" />
+      <xacro:property name="inertia_y_offset" value="${-wheel_config['inertia_y_offset']}" />
     </xacro:if>
-
 
     <link name="${prefix}_wheel_link">
        <visual>
         <geometry>
-            <mesh filename="${mesh}" scale="1.0 1.0 1.0" />
+            <mesh filename="file://$(find ${wheel_config['mesh_package']})/${wheel_config['folder_path']}/${prefix}_wheel.dae" />
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
       </visual>
 
       <collision>
         <geometry>
-            <mesh filename="file://$(find ${wheel_props['mesh_package']})/${wheel_props['folder_path']}/collision.stl" scale="1.0 1.0 1.0" />
+            <mesh filename="file://$(find ${wheel_config['mesh_package']})/${wheel_config['folder_path']}/collision.stl" />
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
       </collision>
 
       <inertial>
         <origin xyz="0.0 ${inertia_y_offset} 0.0" rpy="0.0 0.0 0.0"/>
-        <mass value="${wheel_props['mass']}" />
-        <inertia ixx="${wheel_props['inertia']['ixx']}"
+        <mass value="${wheel_config['mass']}" />
+        <inertia ixx="${wheel_config['inertia']['ixx']}"
                  ixy="0.0"
                  ixz="0.0"
-                 iyy="${wheel_props['inertia']['iyy']}"
+                 iyy="${wheel_config['inertia']['iyy']}"
                  iyz="0.0"
-                 izz="${wheel_props['inertia']['izz']}" />
+                 izz="${wheel_config['inertia']['izz']}" />
       </inertial>
     </link>
 
-    <joint name="${prefix}_wheel_joint" type="continuous">
+    <joint name="${prefix}_joint" type="continuous">
       <parent link="body_link" />
       <child link="${prefix}_wheel_link" />
       <origin xyz="${x} ${y} 0.0" rpy="0.0 0.0 0.0" />

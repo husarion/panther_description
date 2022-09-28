@@ -28,7 +28,7 @@
 
       <collision>
         <geometry>
-          <mesh filename="file://$(find panther_description)/meshes/components/external_antenna.dae" />
+          <mesh filename="file://$(find panther_description)/meshes/components/external_antenna_collision.stl" />
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
       </collision>

@@ -17,6 +17,12 @@
       <xacro:property name="tf_prefix_ext" value="${tf_prefix}_" />
     </xacro:unless>
 
+    <joint name="${parent_link}_to_${tf_prefix_ext}external_antenna_link_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent_link}" />
+      <child link="${tf_prefix_ext}external_antenna_link" />
+    </joint>
+
     <link name="${tf_prefix_ext}external_antenna_link">
       <visual>
         <geometry>
@@ -39,19 +45,13 @@
       </inertial>
     </link>
 
-    <joint name="${parent_link}_to_${tf_prefix_ext}external_antenna_link_joint" type="fixed">
-      <origin xyz="${xyz}" rpy="${rpy}" />
-      <parent link="${parent_link}" />
-      <child link="${tf_prefix_ext}external_antenna_link" />
-    </joint>
-
-    <link name="${tf_prefix_ext}${frame_id}"></link>
-
     <joint name="${tf_prefix_ext}external_antenna_link_to_${tf_prefix_ext}${frame_id}_joint" type="fixed">
       <origin xyz="0.045 0.0 0.004" rpy="0.0 0.0 0.0" />
       <parent link="${tf_prefix_ext}external_antenna_link" />
       <child link="${tf_prefix_ext}${frame_id}" />
     </joint>
+
+    <link name="${tf_prefix_ext}${frame_id}"></link>
 
     <!-- based on Teltonika RUTX11 datasheet and measuremets-->
     <gazebo>

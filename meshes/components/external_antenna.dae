@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 3.0.1 commit date:2022-01-25, commit time:17:19, hash:dc2d18018171</authoring_tool>
     </contributor>
-    <created>2022-09-26T13:53:28</created>
-    <modified>2022-09-26T13:53:28</modified>
+    <created>2022-09-28T11:52:16</created>
+    <modified>2022-09-28T11:52:16</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -72,7 +72,7 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node id="GPS1" name="GPS1" type="NODE">
-        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <matrix sid="transform">1 0 0 0.04515354 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
         <instance_geometry url="#GPS1_001-mesh" name="GPS1">
           <bind_material>
             <technique_common>

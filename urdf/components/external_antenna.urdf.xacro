@@ -5,6 +5,9 @@
                        tf_prefix:=None
                        topic:=gps
                        frame_id:=gps
+                       initial_latitude:=53.1978
+                       initial_longitude:=18.3735
+                       initial_altitude:=89.0
                        simulation_engine:=gazebo-classic">
 
     <xacro:if value="${tf_prefix == 'None'}">
@@ -45,24 +48,24 @@
     <link name="${tf_prefix_ext}${frame_id}"></link>
 
     <joint name="${tf_prefix_ext}external_antenna_link_to_${tf_prefix_ext}${frame_id}_joint" type="fixed">
-      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+      <origin xyz="0.045 0.0 0.004" rpy="0.0 0.0 0.0" />
       <parent link="${tf_prefix_ext}external_antenna_link" />
       <child link="${tf_prefix_ext}${frame_id}" />
     </joint>
 
     <!-- based on Teltonika RUTX11 datasheet and measuremets-->
     <gazebo>
-      <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
+      <plugin name="gps" filename="libhector_gazebo_ros_gps.so">
         <updateRate>5</updateRate>
         <robotNamespace>/</robotNamespace>
         <bodyName>${tf_prefix_ext}${frame_id}</bodyName>
         <frameId>${tf_prefix_ext}${frame_id}</frameId>
         <topicName>/${topic}/fix</topicName>
         <velocityTopicName>/${topic}/vel</velocityTopicName>
-        <referenceLatitude>53.1978</referenceLatitude>
-        <referenceLongitude>18.3735</referenceLongitude>
-        <referenceHeading>0</referenceHeading>
-        <referenceAltitude>0</referenceAltitude>
+        <referenceLatitude>${initial_latitude}</referenceLatitude>
+        <referenceLongitude>${initial_longitude}</referenceLongitude>
+        <referenceHeading>0.0</referenceHeading>
+        <referenceAltitude>${initial_altitude}</referenceAltitude>
         <drift>0.0001 0.0001 0.0001</drift>
         <gaussianNoise>3.0 3.0 3.0</gaussianNoise>
       </plugin>

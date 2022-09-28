@@ -26,18 +26,12 @@
     wheel_config_path="$(arg wheel_config_path)"
     simulation_engine="$(arg simulation_engine)" />
 
-  <!-- <xacro:include filename="$(find ros_components_description)/urdf/rplidar_s1.gazebo.xacro" ns="lidar" />
+  <xacro:include filename="$(find ros_components_description)/urdf/rplidar_s1.gazebo.xacro" ns="lidar" />
   <xacro:lidar.rplidar_s1
     parent_link="cover_link"
     xyz="0.185 0.0 0.0"
     rpy="0.0 0.0 0.0"
     use_gpu="$(arg use_gpu)"
-    simulation_engine="$(arg simulation_engine)" /> -->
-
-  <xacro:include filename="$(find panther_description)/urdf/components/external_antenna.urdf.xacro" ns="antenna" />
-  <xacro:antenna.external_antenna
-    parent_link="cover_link"
-    xyz="0.0 0.0 0.0"
-    rpy="0.0 0.0 0.0" />
+    simulation_engine="$(arg simulation_engine)" />
 
 </robot>

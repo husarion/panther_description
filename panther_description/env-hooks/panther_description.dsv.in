@@ -1,2 +1,0 @@
-prepend-non-duplicate;GAZEBO_MODEL_PATH;share/panther_description/models
-prepend-non-duplicate;GAZEBO_RESOURCE_PATH;share/panther_description/worlds

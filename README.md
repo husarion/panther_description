@@ -1,52 +1,62 @@
 # panther_description
 
-URDF model of Panther robot
+## Installation
 
-## Required plugins
-
-panther_description package uses [hector_gazebo_plugins](http://wiki.ros.org/hector_gazebo_plugins) to simulate IMU and GPS.
-
-## Configuring
-
-### Xacro parameters
-
-- `panther_common_props_path` *(default: [panther_common.yaml](./panther_description/config/panther_common.yaml))* - description of basic Panther parameters such as mass, inertia, torque, meshes and colors. Available colors are defined in [materials.urdf.xacro](./panther_description/urdf/materials.urdf.xacro).
-
-- `wheel_props_path` *(default: [WH01.yaml](./panther_description/config/WH01.yaml))* - description of used wheel type.
-
-- `use_gpu` *(default: false)* - sets LIDAR sensors to use GPU enabled gazebo plugin.
-
-
-### Using different wheel types
-
-Wheel type is determined by `wheel_props_path` parameter. Those YAML files define all physical properties of wheels and their gazebo plugin.
-
-Predefined wheels:
-- `WH01.yaml` - off-road skid drive wheels. Panther standard wheels
-
-- `WH02.yaml` - mecanum wheels 
-
-- `WH04.yaml` - small skid drive wheels
-
-### Changing sensor configuration
-
-Predefined sensors are:
-- Orbbec Astra
-- Slamtec RPLIDAR S1
-- Velodyne Puck
-- Ouster OS1 32
-
-You can add those sensors defining them in [panther.urdf.xacro](./panther_description/urdf/panther.urdf.xacro). Defining Velodyne Puck would look as follows.
-``` xml
-<xacro:gazebo.velodyne_puck xyz="0.185 0 0.17" rpy="0 0 0" use_gpu="$(arg use_gpu)" />
+In order to build the package run:
+``` bash
+rosdep update --rosdistro $ROS_DISTRO
+rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
+catkin build
 ```
 
-You can define multiple sensors by changing parameters for both LIDAR sensors and camera `prefix` and `topic` for LIDAR sensors. This way you will avoid collisions in link names and topics.
+<!-- ## Usage
 
-For other depth cameras we suggest looking at official repositories:
-- [Intel RealSense](https://github.com/IntelRealSense/realsense-ros)
-- [Stereolabs ZED](https://github.com/stereolabs/zed-ros-wrapper)
+Basic Panther configuration can be found in file [panther.urdf.xacro](./panther_description/urdf/panther.urdf.xacro). This is an example configuration showing how to use the model. This can be used to import in launch files as a baseline model. For more advanced use cases, [panther_macro.urdf.xacro](./panther_description/urdf/panther_macro.urdf.xacro) is designed to be integrated into custom robot configurations. -->
 
-## Launch examples
+## Parameters
 
-Since this repository contains only description of robot launch examples were moved to [panther_simulation/panther_gazebo](https://github.com/husarion/panther_simulation/tree/main/panther_gazebo) examples section.
+Arguments passed to the [panther.urdf.xacro](./panther_description/urdf/panther.urdf.xacro) are the same as parameters of [panther_macro.urdf.xacro](./panther_description/urdf/panther_macro.urdf.xacro). Thus, this section covers both of them.
+
+
+- `use_sim` *(default: false)* - Changes between *ros2_control* for simulation and hardware **[TO BE IMPLEMENTED]**.
+- `dual_bat` *(default: false)* - Changes inertia and mass for robot body to match 2 batteries setup.
+- `imu_pos_x` *(default: 0.169)* - **x** coordinate of IMU sensor in relation to `body_link`.
+- `imu_pos_y` *(default: 0.025)* - **y** coordinate of IMU sensor in relation to `body_link`.
+- `imu_pos_z` *(default: 0.092)* - **z** coordinate of IMU sensor in relation to `body_link`.
+- `imu_rot_r` *(default: 0.0)* - roll rotation of IMU sensor in relation to `body_link`.
+- `imu_rot_p` *(default: 0.0)* - pitch rotation of IMU sensor in relation to `body_link`.
+- `imu_rot_y`  *(default: 0.0)* - yaw rotation of IMU sensor in relation to `body_link`.
+- `wheel_config_path` *(default: $(find panther_description)/config/WH01.yaml)* - absolute path to YAML file defining wheel properties.
+- `simulation_engine` *(default: gazebo-classic)* - physics engine to select plugins for. Supported engines: `gazebo-classic` **[MORE ENGINES TO BE IMPLEMENTED]**.
+
+There is one additional [panther.urdf.xacro](./panther_description/urdf/panther.urdf.xacro) argument:
+- `use_gpu` *(default: false)* - Turns on GPU acceleration for sensors.
+It is not present in the [panther_macro.urdf.xacro](./panther_description/urdf/panther_macro.urdf.xacro) since base of a robot does not have any sensors that can be accelerated with GPU.
+
+Parameter `wheel_config_path` allows using non-standard wheels with Panther robot without modifying URDF file. Syntax is following:
+- `wheel_radius` - wheel radius.
+- `wheel_separation` - separation of wheels alongside *y* axis.
+- `mass` - wheel mass in **[Kg]**.
+- `inertia` - diagonal of inertia tensor in **[Kg m^2]**. Required subfields:
+  - `ixx` - inertia alongside axis **x**.
+  - `iyy` - inertia alongside axis **y**.
+  - `izz` - inertia alongside axis **z**.
+- `inertia_y_offset` - Offset of center of mass in **y** direction in **[m]**.
+- `mesh_package` - ROS package name to search for custom meshes. Used in evaluation **$(find my_amazing_package)/**.
+- `folder_path` - path used to search for mesh files within ROS package.
+- `kinematics` - kinematics type. Possible options: `differential`, `mecanum`.
+
+Wheels have to be named as follows:
+- `collision.stl` - wheel collision mesh.
+- `fl_wheel.dae` - front, left wheel visual mesh.
+- `fr_wheel.dae` - front, right wheel visual mesh.
+- `rl_wheel.dae` - rear, left wheel visual mesh.
+- `rr_wheel.dae` - rear, right wheel visual mesh.
+
+## Panther specific components configuration
+
+GPS antenna component is defined in [external_antenna.urdf.xacro](./panther_description/urdf/components/external_antenna.urdf.xacro). Parameters of the macro follow convention from the next section.
+
+## Sensor configuration
+
+Sensors are defined in [husarion/ros_components_description](https://github.com/husarion/ros_components_description) repository. Which is downloaded by VCS in the installation step. A guide on how to combine those sensors with the robot will be written soon.

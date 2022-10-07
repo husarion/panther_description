@@ -21,7 +21,7 @@ jobs:
       - uses: ros-tooling/action-ros-ci@v0.2
         with:
           package-name: ros_components_description
-          target-ros2-distro: ${{ matrix.ros-distro }}
+          target-ros1-distro: ${{ matrix.ros-distro }}
           vcs-repo-file-url: ${PWD}/components.repos
   
   catkin-test-build-ubuntu-20-04:
@@ -39,5 +39,5 @@ jobs:
       - uses: ros-tooling/action-ros-ci@v0.2
         with:
           package-name: ros_components_description
-          target-ros2-distro: ${{ matrix.ros-distro }}
+          target-ros1-distro: ${{ matrix.ros-distro }}
           vcs-repo-file-url: ${PWD}/components.repos

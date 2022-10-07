@@ -2,8 +2,9 @@
 
 ## Installation
 
-In order to build the package run:
+This package relates to other repositories that have to be built from source. In order to build the package run:
 ``` bash
+vcs import < components.repos src
 rosdep update --rosdistro $ROS_DISTRO
 rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
 catkin build

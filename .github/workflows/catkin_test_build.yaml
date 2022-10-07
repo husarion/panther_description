@@ -13,7 +13,7 @@ jobs:
 
     runs-on: ubuntu-18.04
 
-    name: ${{ matrix.ros-distro }}-${{ matrix.build-type }}-18-04
+    name: ${{ matrix.ros-distro }}-18-04
     steps:
       - uses: ros-tooling/setup-ros@v0.3
         with:
@@ -31,7 +31,7 @@ jobs:
 
     runs-on: ubuntu-20.04
 
-    name: ${{ matrix.ros-distro }}-${{ matrix.build-type }}-20-04
+    name: ${{ matrix.ros-distro }}-20-04
     steps:
       - uses: ros-tooling/setup-ros@v0.3
         with:

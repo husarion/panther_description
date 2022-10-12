@@ -3,7 +3,7 @@ name: ROS2 test build
 on:
   push:
     branches:
-      - 'ros2-workflow-devel'
+      - 'ros2'
   
 jobs:
   colcon-test-build-ubuntu-20-04:

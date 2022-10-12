@@ -7,7 +7,7 @@
     imu_pos_x imu_pos_y imu_pos_z
     imu_rot_r imu_rot_p imu_rot_y" >
 
-    <link name="base_link"></link> 
+    <link name="base_link" /> 
 
     <joint name="base_link_to_body_link_joint" type="fixed">
       <origin xyz="0.0 0.0 ${wheel_radius}" rpy="0.0 0.0 0.0" />

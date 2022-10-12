@@ -79,10 +79,10 @@
             <wheelSeparation>${wheel_config['wheel_separation']}</wheelSeparation>
             <wheelDiameter>${wheel_config['wheel_radius']*2.0}</wheelDiameter>
             <torque>34.5</torque>
-            <leftFrontJoint>fl_joint</leftFrontJoint>
-            <rightFrontJoint>fr_joint</rightFrontJoint>
-            <leftRearJoint>rl_joint</leftRearJoint>
-            <rightRearJoint>rr_joint</rightRearJoint>
+            <leftFrontJoint>fl_wheel_joint</leftFrontJoint>
+            <rightFrontJoint>fr_wheel_joint</rightFrontJoint>
+            <leftRearJoint>rl_wheel_joint</leftRearJoint>
+            <rightRearJoint>rr_wheel_joint</rightRearJoint>
             <topicName>cmd_vel</topicName>
             <commandTopic>cmd_vel</commandTopic>
             <broadcastTF>true</broadcastTF>

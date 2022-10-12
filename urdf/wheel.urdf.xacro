@@ -25,7 +25,7 @@
       <xacro:property name="inertia_y_offset" value="${-wheel_config['inertia_y_offset']}" />
     </xacro:if>
 
-    <joint name="${prefix}_joint" type="continuous">
+    <joint name="${prefix}_wheel_joint" type="continuous">
       <parent link="body_link" />
       <child link="${prefix}_wheel_link" />
       <origin xyz="${x} ${y} 0.0" rpy="0.0 0.0 0.0" />
@@ -62,18 +62,18 @@
       </inertial>
     </link>
 
-    <transmission name="${prefix}_transmission" type="SimpleTransmission">
+    <transmission name="${prefix}_wheel_transmission" type="SimpleTransmission">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_joint">
+      <joint name="${prefix}_wheel_joint">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
-      <actuator name="${prefix}_actuator">
+      <actuator name="${prefix}_wheel_actuator">
         <mechanicalReduction>1</mechanicalReduction>
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </actuator>
     </transmission>
 
-    <gazebo reference="${prefix}_joint">
+    <gazebo reference="${prefix}_wheel_joint">
       <provideFeedback>true</provideFeedback>
     </gazebo>
 

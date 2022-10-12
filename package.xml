@@ -2,7 +2,7 @@
 <package format="2">
   <name>panther_description</name>
   <version>0.1.0</version>
-  <description>Semantir description of Huasrion Panther robot</description>
+  <description>Semantic description of Huasrion Panther robot</description>
 
   <maintainer email="support@husarion.com">Husarion</maintainer>
   <maintainer email="krzysztof.wojciechowski@husarion.com">Krzysztof Wojciechowski</maintainer>

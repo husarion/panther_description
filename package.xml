@@ -23,11 +23,6 @@
   <exec_depend condition="$ROS_DISTRO == foxy">joint_state_publisher</exec_depend>
   <exec_depend condition="$ROS_DISTRO == galactic">joint_state_broadcaster</exec_depend>
   <exec_depend condition="$ROS_DISTRO == humble">joint_state_broadcaster</exec_depend>
-  
-  <exec_depend condition="$GAZEBO_VERSION == ignition-gazebo">ros_ign</exec_depend>
-  <exec_depend condition="$GAZEBO_VERSION == gazebo-classic">gazebo_ros</exec_depend>
-  <exec_depend condition="$GAZEBO_VERSION == gazebo-classic">gazebo_plugins</exec_depend>
-  <exec_depend condition="$GAZEBO_VERSION == gazebo-classic">hector_gazebo_plugins</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

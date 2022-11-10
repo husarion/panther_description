@@ -25,30 +25,27 @@
       <xacro:property name="inertia_y_offset" value="${-wheel_config['inertia_y_offset']}" />
     </xacro:if>
 
-    <joint name="${prefix}_joint" type="continuous">
+    <joint name="${prefix}_wheel_joint" type="continuous">
       <parent link="body_link" />
       <child link="${prefix}_wheel_link" />
       <origin xyz="${x} ${y} 0.0" rpy="0.0 0.0 0.0" />
       <axis xyz="0.0 1.0 0.0" />
 
-      <limit effort="34.5"
-             velocity="2.0" />
-
-      <dynamics damping="0.01"
-                friction="0.01"/>
+      <limit effort="34.5" velocity="2.0" />
+      <dynamics damping="0.01" friction="0.01" />
     </joint>
     
     <link name="${prefix}_wheel_link">
        <visual>
         <geometry>
-            <mesh filename="file://$(find ${wheel_config['mesh_package']})/${wheel_config['folder_path']}/${prefix}_wheel.dae" />
+          <mesh filename="file://$(find ${wheel_config['mesh_package']})/${wheel_config['folder_path']}/${prefix}_wheel.dae" />
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
       </visual>
 
       <collision>
         <geometry>
-            <mesh filename="file://$(find ${wheel_config['mesh_package']})/${wheel_config['folder_path']}/collision.stl" />
+          <mesh filename="file://$(find ${wheel_config['mesh_package']})/${wheel_config['folder_path']}/collision.stl" />
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
       </collision>
@@ -65,7 +62,12 @@
       </inertial>
     </link>
 
-    
+    <gazebo reference="${prefix}_wheel_link">
+      <mu1 value="0.85"/>
+			<mu2 value="0.85"/>
+			<kp value="100000000.0" />
+			<kd value="5.0" />
+			<fdir1 value="1 0 0"/>
+    </gazebo>
   </xacro:macro>
-
 </robot>

@@ -67,10 +67,10 @@
     <xacro:if value="${simulation_engine == 'gazebo-classic'}">
       <gazebo>
           <plugin name="joint_states" filename="libgazebo_ros_joint_state_publisher.so">
-          <joint_name>fl_joint</joint_name>
-          <joint_name>fr_joint</joint_name>
-          <joint_name>rl_joint</joint_name>
-          <joint_name>rr_joint</joint_name>
+          <joint_name>fl_wheel_joint</joint_name>
+          <joint_name>fr_wheel_joint</joint_name>
+          <joint_name>rl_wheel_joint</joint_name>
+          <joint_name>rr_wheel_joint</joint_name>
         </plugin>
       </gazebo>
 
@@ -81,10 +81,10 @@
             </ros>
             <update_rate>10</update_rate>
             <num_wheel_pairs>2</num_wheel_pairs>
-            <left_joint>fl_joint</left_joint>
-            <right_joint>fr_joint</right_joint>
-            <left_joint>rl_joint</left_joint>
-            <right_joint>rr_joint</right_joint>
+            <left_joint>fl_wheel_joint</left_joint>
+            <right_joint>fr_wheel_joint</right_joint>
+            <left_joint>rl_wheel_joint</left_joint>
+            <right_joint>rr_wheel_joint</right_joint>
             <wheel_separation>${wheel_config['wheel_separation']}</wheel_separation>
             <wheel_separation>${wheel_config['wheel_separation']}</wheel_separation>
             <wheel_diameter>${wheel_config['wheel_radius']*2.0}</wheel_diameter>
@@ -117,9 +117,6 @@
           </plugin>
         </gazebo>
       </xacro:if>
-
-  </xacro:if>
-
+    </xacro:if>
   </xacro:macro>
-
 </robot>

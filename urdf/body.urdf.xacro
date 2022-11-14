@@ -7,7 +7,7 @@
     imu_pos_x imu_pos_y imu_pos_z
     imu_rot_r imu_rot_p imu_rot_y" >
 
-    <link name="base_link"></link> 
+    <link name="base_link" /> 
 
     <joint name="base_link_to_body_link_joint" type="fixed">
       <origin xyz="0.0 0.0 ${wheel_radius}" rpy="0.0 0.0 0.0" />
@@ -46,8 +46,7 @@
       <child link="imu_link" />
     </joint>
 
-    <link name="imu_link"></link>
-
+    <link name="imu_link" />
     
     <joint name="body_link_front_light_link_joint" type="fixed">
       <origin xyz="0.362 0.0 0.0" rpy="0.0 0.0 0.0" />
@@ -55,16 +54,15 @@
       <child link="front_light_link" />
     </joint>
     
-    <link name="front_light_link"></link>
+    <link name="front_light_link" />
 
-    
     <joint name="body_link_to_rear_light_link_joint" type="fixed">
       <origin xyz="-0.362 0.0 0.0" rpy="0.0 0.0 ${pi}" />
       <parent link="body_link" />
       <child link="rear_light_link" />
     </joint>
     
-    <link name="rear_light_link"></link>
+    <link name="rear_light_link" />
     
     <joint name="body_link_to_cover_link_joint" type="fixed">
       <origin xyz="0.0 0.0 0.1715" rpy="0.0 0.0 0.0" />
@@ -72,7 +70,7 @@
       <child link="cover_link" />
     </joint>
     
-    <link name="cover_link"></link>
+    <link name="cover_link" />
     
     <xacro:if value="${simulation_engine == 'gazebo-classic'}">
       <!-- based on PhidgetSpatial datasheet -->
@@ -92,8 +90,6 @@
           <rateGaussianNoise>${imu_gyro_noise} ${imu_gyro_noise} ${imu_gyro_noise}</rateGaussianNoise>
         </plugin>
       </gazebo>
-  </xacro:if>
-
+    </xacro:if>
   </xacro:macro>
-
 </robot>

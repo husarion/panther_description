@@ -51,7 +51,7 @@
       <child link="${tf_prefix_ext}${frame_id}" />
     </joint>
 
-    <link name="${tf_prefix_ext}${frame_id}"></link>
+    <link name="${tf_prefix_ext}${frame_id}" />
 
     <!-- based on Teltonika RUTX11 datasheet and measuremets-->
     <gazebo>

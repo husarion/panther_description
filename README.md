@@ -4,6 +4,9 @@
 
 This package relates to other repositories that have to be built from source. It also requires the user to select which Gazebo one wants to use. To select Gazebo version, run:
 ``` bash
+# In order to include required packages for simulation
+export HUSARION_ROS_BUILD_TYPE=simulation
+
 # For Ignition Gazebo
 export GAZEBO_VERSION=ignition-gazebo
 # For Gazebo Classic
@@ -54,11 +57,28 @@ Parameter `wheel_config_path` allows using non-standard wheels with Panther robo
 - `kinematics` - kinematics type. Possible options: `differential`, `mecanum`.
 
 Wheels have to be named as follows:
-- `collision.stl` - wheel collision mesh.
+- `wheel_collision.stl` - wheel collision mesh.
 - `fl_wheel.dae` - front, left wheel visual mesh.
 - `fr_wheel.dae` - front, right wheel visual mesh.
 - `rl_wheel.dae` - rear, left wheel visual mesh.
 - `rr_wheel.dae` - rear, right wheel visual mesh.
+
+
+## Links
+
+Evaluating [panther_macro.urdf.xacro](./urdf/panther_macro.urdf.xacro) following links are created:
+- `base_link` laying on the ground in center of the robot.
+- `body_link` right above the `base_link` on the level of rotation axis of wheels.
+- `imu_link` location of IMU sensor.
+- `fl_wheel_link` front left wheel link.
+- `fr_wheel_link` front right wheel link.
+- `rl_wheel_link` rear left wheel link.
+- `rr_wheel_link` rear right wheel link.
+
+There are also links created for user to attach own sensors and components. The purpose of those links is to simplify localization of mounting points. Those are mentioned links:
+- `cover_link` at the level of the top surface of rails, located in the center of the robot. Positive `x` axis pointing in front of the robot, positive `z` axis pointing up from the robot, and positive `y` pointing to the left of a robot.
+- `front_light_link` in front of the robot, at the height of v-slot of front lights. Exact height is in the middle of the v-slot. Position in `x` axis is the front surface of the v-slot, while in `y` axis it is the center of the robot. Rotation is same as `cover_link`.
+- `rear_light_link` analogous to `front_light_link`, but mounted to the back of the robot. This reference frame has positive `x` facing to the back of a robot. Positive `z` is facing up and positive and `y` is facing to the right of a robot. 
 
 ## Panther specific components configuration
 

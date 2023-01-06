@@ -21,10 +21,10 @@
   <depend>ros_components_description</depend>
 
   
-  <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation) and ($GAZEBO_VERSION == gazebo-classic)">
+  <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation) and ($SIMULATION_ENGINE == gazebo-classic)">
     hector_gazebo_plugins
   </depend>
-  <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation) and ($GAZEBO_VERSION == gazebo-classic)">
+  <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation) and ($SIMULATION_ENGINE == gazebo-classic)">
     gazebo_plugins
   </depend>
   

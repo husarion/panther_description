@@ -8,9 +8,9 @@ This package relates to other repositories that have to be built from source. It
 export HUSARION_ROS_BUILD_TYPE=simulation
 
 # For Ignition Gazebo
-export GAZEBO_VERSION=ignition-gazebo
+export SIMULATION_ENGINE=ignition-gazebo
 # For Gazebo Classic
-export GAZEBO_VERSION=gazebo-classic
+export SIMULATION_ENGINE=gazebo-classic
 ```
 ``` bash
 vcs import < components.repos src

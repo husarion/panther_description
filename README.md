@@ -1,6 +1,6 @@
 # panther_description
 
-:warning: This repository is deprecated. You can find up to data ros1 Husarion Panther description on [husarion/panhter_ros/panther_description](https://github.com/husarion/panther_ros/tree/ros1/panther_description).
+:warning: This repository is deprecated. You can find up to data ros1 Husarion Panther description on [husarion/panther_ros/panther_description](https://github.com/husarion/panther_ros/tree/ros1/panther_description).
 
 A package containing the description of the Husarion Panther robot.
 

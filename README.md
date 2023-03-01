@@ -1,6 +1,10 @@
-# panther_description
+# panther_description :no_entry_sign:
 
-:warning: This repository is deprecated. You can find up to data ros1 Husarion Panther description on [husarion/panther_ros/panther_description](https://github.com/husarion/panther_ros/tree/ros1/panther_description).
+> **Warning**
+>
+> We have migrated the development of the `panther_description` package to the [panther_ros](https://github.com/husarion/panther_ros) repository.
+>
+> For additional guidance on configuring the Panther robot and running demos, refer to the [panther-docker](https://github.com/husarion/panther-docker) repository or check out the manuals available on the official Husarion [website](https://husarion.com/manuals/panther/).
 
 A package containing the description of the Husarion Panther robot.
 
